@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NETFLIX PREMIUM - Bissau Mercado Digital</title>
+    <title>CRIAÇÃO DE WEBSITES - Bissau Mercado Digital</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,19 +18,19 @@
             pointer-events: none !important;
         }
 
-        /* Variáveis de Cores do Tema NETFLIX */
+        /* Variáveis de Cores do Tema WEB DEV */
         :root {
-            --bg-dark: #141414;
-            --bg-card: #1f1f1f;
-            --bg-card-hover: #2a2a2a;
-            --netflix-red: #e50914;
-            --netflix-red-hover: #b9090b;
-            --netflix-glow: rgba(229, 9, 20, 0.35);
+            --bg-dark: #090d16;
+            --bg-card: #121926;
+            --bg-card-hover: #1c273e;
+            --dev-cyan: #06b6d4;
+            --dev-cyan-hover: #0891b2;
+            --dev-glow: rgba(6, 182, 212, 0.4);
             --text-main: #ffffff;
-            --text-muted: #a3a3a3;
+            --text-muted: #94a3b8;
             --success: #10b981;
-            --border: #2d2d2d;
-            --border-highlight: rgba(229, 9, 20, 0.3);
+            --border: #1e293b;
+            --border-highlight: rgba(6, 182, 212, 0.35);
         }
 
         /* Reset Global */
@@ -58,7 +58,7 @@
         header {
             position: sticky;
             top: 0;
-            background: rgba(20, 20, 20, 0.9);
+            background: rgba(9, 13, 22, 0.9);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             display: flex;
@@ -84,24 +84,24 @@
         }
 
         .header-btn:hover {
-            background: rgba(229, 9, 20, 0.2);
-            color: var(--netflix-red);
+            background: rgba(6, 182, 212, 0.2);
+            color: var(--dev-cyan);
         }
 
         header h1 {
             font-size: 1.1rem;
             font-weight: 800;
             letter-spacing: 1px;
-            color: var(--netflix-red);
-            text-shadow: 0 0 12px var(--netflix-glow);
+            color: var(--dev-cyan);
+            text-shadow: 0 0 12px var(--dev-glow);
         }
 
-        /* 2. Banner de Destaque Estilo Netflix */
+        /* 2. Banner de Destaque Estilo Web Dev */
         .hero-banner {
             position: relative;
             height: 250px;
-            background: linear-gradient(180deg, rgba(20,20,20,0.2) 0%, rgba(20,20,20,0.95) 100%), 
-                        url('https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=1200&auto=format&fit=crop') center/cover no-repeat;
+            background: linear-gradient(180deg, rgba(9,13,22,0.2) 0%, rgba(9,13,22,0.95) 100%), 
+                        url('https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=1200&auto=format&fit=crop') center/cover no-repeat;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -114,7 +114,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: radial-gradient(circle at center, rgba(229, 9, 20, 0.15) 0%, transparent 70%);
+            background: radial-gradient(circle at center, rgba(6, 182, 212, 0.25) 0%, transparent 70%);
         }
 
         .badge-disponivel {
@@ -161,14 +161,14 @@
         .play-icon {
             width: 72px;
             height: 72px;
-            background: linear-gradient(135deg, var(--netflix-red), var(--netflix-red-hover));
+            background: linear-gradient(135deg, var(--dev-cyan), var(--dev-cyan-hover));
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             font-size: 28px;
             color: #ffffff;
-            box-shadow: 0 0 25px var(--netflix-glow);
+            box-shadow: 0 0 25px var(--dev-glow);
             padding-left: 5px;
             position: relative;
         }
@@ -177,7 +177,7 @@
             content: '';
             position: absolute;
             inset: -6px;
-            border: 2px solid var(--netflix-red);
+            border: 2px solid var(--dev-cyan);
             border-radius: 50%;
             opacity: 0.6;
             animation: ping 2s infinite;
@@ -189,7 +189,7 @@
             letter-spacing: 0.5px;
             color: #ffffff;
             text-transform: uppercase;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.75);
             padding: 4px 12px;
             border-radius: 12px;
             backdrop-filter: blur(4px);
@@ -242,8 +242,8 @@
 
         .product-title span {
             font-size: 0.8rem;
-            background: var(--netflix-red);
-            color: #ffffff;
+            background: var(--dev-cyan);
+            color: #000000;
             padding: 2px 8px;
             border-radius: 6px;
             font-weight: 800;
@@ -281,11 +281,11 @@
         .features-list li svg {
             width: 18px;
             height: 18px;
-            fill: var(--netflix-red);
+            fill: var(--dev-cyan);
             flex-shrink: 0;
         }
 
-        /* 5. Seleção de Planos */
+        /* 5. Seleção de Opções de Sites */
         .plan-section {
             margin-bottom: 1.5rem;
             background-color: var(--bg-card);
@@ -301,6 +301,25 @@
             font-weight: 700;
             margin-bottom: 0.6rem;
             color: var(--text-main);
+        }
+
+        .custom-input {
+            width: 100%;
+            padding: 14px 16px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #ffffff;
+            background-color: var(--bg-dark);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            outline: none;
+            margin-bottom: 1.25rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .custom-input:focus {
+            border-color: var(--dev-cyan);
+            box-shadow: 0 0 10px var(--dev-glow);
         }
 
         .custom-select-wrapper {
@@ -320,15 +339,15 @@
             outline: none;
             cursor: pointer;
             transition: border-color 0.2s, box-shadow 0.2s;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e50914' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2306b6d4' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
             background-repeat: no-repeat;
             background-position: right 16px center;
             background-size: 18px;
         }
 
         .custom-select:focus {
-            border-color: var(--netflix-red);
-            box-shadow: 0 0 10px var(--netflix-glow);
+            border-color: var(--dev-cyan);
+            box-shadow: 0 0 10px var(--dev-glow);
         }
 
         .custom-select option {
@@ -347,12 +366,12 @@
         }
 
         .estimated-price strong {
-            color: var(--netflix-red);
+            color: var(--dev-cyan);
             font-size: 1.25rem;
             font-weight: 800;
         }
 
-        /* 6. Botão de Compra WhatsApp */
+        /* 6. Botão de Ação WhatsApp */
         .buy-action {
             margin-bottom: 2rem;
         }
@@ -363,14 +382,14 @@
             align-items: center;
             gap: 10px;
             width: 100%;
-            background: linear-gradient(135deg, #e50914 0%, #b9090b 100%);
-            color: #ffffff;
+            background: linear-gradient(135deg, var(--dev-cyan) 0%, var(--dev-cyan-hover) 100%);
+            color: #000000;
             text-align: center;
             padding: 18px;
             font-size: 1.15rem;
             font-weight: 800;
             border-radius: 14px;
-            box-shadow: 0 6px 20px var(--netflix-glow);
+            box-shadow: 0 6px 20px var(--dev-glow);
             transition: all 0.2s ease;
             cursor: pointer;
             border: none;
@@ -380,7 +399,7 @@
 
         .buy-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(229, 9, 20, 0.5);
+            box-shadow: 0 8px 25px rgba(6, 182, 212, 0.6);
         }
 
         .buy-btn:active {
@@ -402,7 +421,7 @@
             gap: 5px;
         }
 
-        /* 7. Descrição do Produto */
+        /* 7. Descrição do Serviço */
         .description-section {
             background-color: var(--bg-card);
             padding: 1.25rem;
@@ -425,9 +444,9 @@
             display: inline-block;
             width: 4px;
             height: 18px;
-            background-color: var(--netflix-red);
+            background-color: var(--dev-cyan);
             border-radius: 4px;
-            box-shadow: 0 0 8px var(--netflix-red);
+            box-shadow: 0 0 8px var(--dev-cyan);
         }
 
         .description-section p {
@@ -503,7 +522,8 @@
         }
 
         .close-btn:hover {
-            background: rgba(229, 9, 20, 0.8);
+            background: rgba(6, 182, 212, 0.8);
+            color: #000000;
         }
 
         /* Container do Vídeo (Aspect Ratio 16:9) */
@@ -536,14 +556,14 @@
             align-items: center;
             padding: 1.5rem;
             text-align: center;
-            background: linear-gradient(135deg, #181818, #282828);
+            background: linear-gradient(135deg, #090d16, #0f172a);
             color: var(--text-muted);
         }
 
         .video-placeholder svg {
             width: 48px;
             height: 48px;
-            fill: var(--netflix-red);
+            fill: var(--dev-cyan);
             margin-bottom: 12px;
         }
 
@@ -571,82 +591,88 @@
     <!-- 1. Cabeçalho Fixo -->
     <header>
         <a href="index.html" class="header-btn" title="Voltar ao início">←</a>
-        <h1>NETFLIX</h1>
+        <h1>CRIAÇÃO DE SITES</h1>
         <a href="#" class="header-btn" title="Opções">⋮</a>
     </header>
 
     <!-- 2. Imagem / Banner de Destaque com Ação de Vídeo -->
     <div class="hero-banner" onclick="openVideoModal()">
-        <div class="badge-disponivel">Disponível</div>
+        <div class="badge-disponivel">Desenvolvimento Profissional</div>
         <div class="play-container">
             <div class="play-icon">▶</div>
-            <span class="play-text">Como funciona? Assista ao vídeo</span>
+            <span class="play-text">Como ter o seu site? Assista ao vídeo</span>
         </div>
     </div>
 
     <!-- 3. Selos de Confiança -->
     <div class="trust-badges-top">
-        <span>✅ Verificado</span>
-        <span>🔒 4K Ultra HD</span>
-        <span>⚡ Entrega Rápida</span>
+        <span>📱 100% Responsivo</span>
+        <span>🌐 Domínio & Hospedagem</span>
+        <span>⚡ Design Moderno</span>
     </div>
 
     <div class="content-padding">
         <!-- 4. Título e Descrição do Produto -->
         <div class="product-header">
-            <h2 class="product-title">NETFLIX <span>4K ULTRA HD</span></h2>
-            <p class="product-subtitle">Acesso a todo o catálogo da Netflix sem interrupções. Filmes, séries, animes e produções originais em altíssima definição!</p>
+            <h2 class="product-title">WEBSITES & <span>LOJAS VIRTUAIS</span></h2>
+            <p class="product-subtitle">Tenha uma presença online profissional para o seu negócio na Guiné-Bissau ou em qualquer parte do mundo. Aumente as suas vendas e a confiança dos seus clientes!</p>
         </div>
         
         <ul class="features-list">
             <li>
                 <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                Compatível com Smart TV, Celular, Tablet e Computador.
+                Design adaptado para Telemóveis, Tablets e Computadores.
             </li>
             <li>
                 <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                Qualidade Ultra HD 4K com Áudio Spatial.
+                Botão de contacto direto para o seu WhatsApp.
             </li>
             <li>
                 <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                Suporte e entrega garantida via WhatsApp.
+                Otimizado para o Google (SEO) com carregamento ultra rápido.
             </li>
         </ul>
 
-        <!-- 5. Seleção de Planos (Dropdown Dinâmico) -->
+        <!-- 5. Formulário de Projeto e Tabela de Preços -->
         <div class="plan-section">
-            <label class="plan-label" for="plano">Selecione a duração do seu acesso:</label>
+            <label class="plan-label" for="nomeNegocio">1. Nome da sua Empresa / Projeto (Opcional):</label>
+            <input type="text" id="nomeNegocio" class="custom-input" placeholder="Ex: Minha Loja Bissau" />
+
+            <label class="plan-label" for="plano">2. Selecione o Tipo de Website desejado:</label>
             <div class="custom-select-wrapper">
                 <select id="plano" class="custom-select" onchange="atualizarPreco()">
-                    <option value="2000" data-tempo="1 Mês">1 Mês — 2.500 FCFA</option>
-                    <option value="5500" data-tempo="3 Meses">3 Meses — 7.500 FCFA</option>
-                    <option value="10000" data-tempo="6 Meses">6 Meses — 15.000 FCFA</option>
-                    <option value="18000" data-tempo="1 Ano">1 Ano — 30.000 FCFA</option>
+                    <option value="35000">Landing Page / Página de Vendas — 35.000 FCFA</option>
+                    <option value="50000">Portfólio / Catálogo Digital — 50.000 FCFA</option>
+                    <option value="75000">Site Institucional / Empresa (Completo) — 75.000 FCFA</option>
+                    <option value="120000">Loja Virtual / E-commerce — 120.000 FCFA</option>
+                    <option value="150000">Sistema Web / Projeto Personalizado — Sob Consulta</option>
                 </select>
             </div>
             <div class="estimated-price">
-                <span>Valor Total:</span>
-                <strong id="preco-display">2.000 FCFA</strong>
+                <span>Investimento Estimado:</span>
+                <strong id="preco-display">35.000 FCFA</strong>
             </div>
         </div>
 
-        <!-- 6. Botão de Compra Dinâmico para WhatsApp -->
+        <!-- 6. Botão de Ação WhatsApp -->
         <div class="buy-action">
             <button class="buy-btn" onclick="comprarWhatsApp()">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
-                COMPRAR AGORA
+                PEDIR ORÇAMENTO NO WHATSAPP
             </button>
             <div class="buy-trust-infos">
-                <span>📩 Ativação em até 6 Horas</span>
-                <span>🔒 Compra Garantida</span>
+                <span>📩 Atendimento Direto</span>
+                <span>🔒 Entrega Garantida</span>
             </div>
         </div>
 
         <!-- 7. Secção de Descrição -->
         <div class="description-section">
-            <h3>Descrição do Produto</h3>
+            <h3>Como Funciona o Processo de Criação?</h3>
             <p>
-                Tenha acesso ilimitado ao maior acervo de entretenimento do mundo. Assista aos filmes mais recentes, séries completas e documentários em qualidade 4K Ultra HD sem anúncios. A conta é entregue pronta com o seu perfil configurado e enviada diretamente para o seu WhatsApp logo após a confirmação do pagamento.
+                1. <strong>Orçamento & Ideia:</strong> Escolha a opção desejada e entre em contacto connosco pelo WhatsApp para definirmos as cores, logótipo e informações do seu site.<br>
+                2. <strong>Desenvolvimento:</strong> Criamos uma versão de demonstração do seu site em poucos dias para que possa analisar e aprovar.<br>
+                3. <strong>Publicação:</strong> Com tudo aprovado, colocamos o seu site no ar com o seu próprio endereço (.com ou .gw) pronto para receber clientes!
             </p>
         </div>
     </div>
@@ -655,7 +681,7 @@
     <div id="videoModal" class="modal-overlay" onclick="fecharModalFora(event)">
         <div class="modal-container">
             <div class="modal-header">
-                <h3 class="modal-title">Como funciona a Netflix Premium</h3>
+                <h3 class="modal-title">Como criamos o seu site profissional</h3>
                 <button class="close-btn" onclick="closeVideoModal()">&times;</button>
             </div>
             <div class="video-wrapper">
@@ -682,18 +708,28 @@
         function atualizarPreco() {
             const select = document.getElementById('plano');
             const opcaoSelecionada = select.options[select.selectedIndex].text;
-            const precoApenas = opcaoSelecionada.split('—')[1] || select.value + ' FCFA';
+            
+            let precoApenas = "";
+            if (opcaoSelecionada.includes('—')) {
+                precoApenas = opcaoSelecionada.split('—')[1];
+            } else {
+                precoApenas = "Sob Consulta";
+            }
+
             document.getElementById('preco-display').innerText = precoApenas.trim();
         }
 
-        // 2. Função de Compra e Redirecionamento Dinâmico para o WhatsApp
+        // 2. Função de Redirecionamento Dinâmico para o WhatsApp
         function comprarWhatsApp() {
             const select = document.getElementById('plano');
             const planoTexto = select.options[select.selectedIndex].text;
+            const nomeNegocioInput = document.getElementById('nomeNegocio').value.trim();
             const numeroWhatsApp = "245955288370";
 
+            const empresaFormatada = nomeNegocioInput ? nomeNegocioInput : "Não informado na página";
+
             // Mensagem formatada
-            const mensagem = `Olá! Gostaria de adquirir a *NETFLIX PREMIUM* no Bissau Mercado Digital.\n\n📌 *Plano Selecionado:* ${planoTexto}\n\nPor favor, envie-me as instruções para efetuar o pagamento.`;
+            const mensagem = `Olá! Gostaria de pedir um orçamento para *CRIAÇÃO DE WEBSITE* no Bissau Mercado Digital.\n\n📌 *Tipo de Projeto:* ${planoTexto}\n🏢 *Empresa / Projeto:* ${empresaFormatada}\n\nPor favor, envie-me mais informações sobre prazos e como iniciar a criação do meu site.`;
 
             // Gerar Link URL
             const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;

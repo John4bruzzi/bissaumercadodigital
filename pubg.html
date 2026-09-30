@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NETFLIX PREMIUM - Bissau Mercado Digital</title>
+    <title>PUBG MOBILE UC - Bissau Mercado Digital</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,19 +18,19 @@
             pointer-events: none !important;
         }
 
-        /* Variáveis de Cores do Tema NETFLIX */
+        /* Variáveis de Cores do Tema PUBG MOBILE */
         :root {
-            --bg-dark: #141414;
-            --bg-card: #1f1f1f;
-            --bg-card-hover: #2a2a2a;
-            --netflix-red: #e50914;
-            --netflix-red-hover: #b9090b;
-            --netflix-glow: rgba(229, 9, 20, 0.35);
+            --bg-dark: #0b0f19;
+            --bg-card: #131b2e;
+            --bg-card-hover: #1c2742;
+            --pubg-gold: #f59e0b;
+            --pubg-gold-hover: #d97706;
+            --pubg-glow: rgba(245, 158, 11, 0.4);
             --text-main: #ffffff;
-            --text-muted: #a3a3a3;
+            --text-muted: #94a3b8;
             --success: #10b981;
-            --border: #2d2d2d;
-            --border-highlight: rgba(229, 9, 20, 0.3);
+            --border: #1e293b;
+            --border-highlight: rgba(245, 158, 11, 0.35);
         }
 
         /* Reset Global */
@@ -58,7 +58,7 @@
         header {
             position: sticky;
             top: 0;
-            background: rgba(20, 20, 20, 0.9);
+            background: rgba(11, 15, 25, 0.9);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             display: flex;
@@ -84,24 +84,24 @@
         }
 
         .header-btn:hover {
-            background: rgba(229, 9, 20, 0.2);
-            color: var(--netflix-red);
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--pubg-gold);
         }
 
         header h1 {
             font-size: 1.1rem;
             font-weight: 800;
             letter-spacing: 1px;
-            color: var(--netflix-red);
-            text-shadow: 0 0 12px var(--netflix-glow);
+            color: var(--pubg-gold);
+            text-shadow: 0 0 12px var(--pubg-glow);
         }
 
-        /* 2. Banner de Destaque Estilo Netflix */
+        /* 2. Banner de Destaque Estilo PUBG */
         .hero-banner {
             position: relative;
             height: 250px;
-            background: linear-gradient(180deg, rgba(20,20,20,0.2) 0%, rgba(20,20,20,0.95) 100%), 
-                        url('https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=1200&auto=format&fit=crop') center/cover no-repeat;
+            background: linear-gradient(180deg, rgba(11,15,25,0.2) 0%, rgba(11,15,25,0.95) 100%), 
+                        url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1200&auto=format&fit=crop') center/cover no-repeat;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -114,7 +114,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: radial-gradient(circle at center, rgba(229, 9, 20, 0.15) 0%, transparent 70%);
+            background: radial-gradient(circle at center, rgba(245, 158, 11, 0.2) 0%, transparent 70%);
         }
 
         .badge-disponivel {
@@ -161,14 +161,14 @@
         .play-icon {
             width: 72px;
             height: 72px;
-            background: linear-gradient(135deg, var(--netflix-red), var(--netflix-red-hover));
+            background: linear-gradient(135deg, var(--pubg-gold), var(--pubg-gold-hover));
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             font-size: 28px;
             color: #ffffff;
-            box-shadow: 0 0 25px var(--netflix-glow);
+            box-shadow: 0 0 25px var(--pubg-glow);
             padding-left: 5px;
             position: relative;
         }
@@ -177,7 +177,7 @@
             content: '';
             position: absolute;
             inset: -6px;
-            border: 2px solid var(--netflix-red);
+            border: 2px solid var(--pubg-gold);
             border-radius: 50%;
             opacity: 0.6;
             animation: ping 2s infinite;
@@ -189,7 +189,7 @@
             letter-spacing: 0.5px;
             color: #ffffff;
             text-transform: uppercase;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.75);
             padding: 4px 12px;
             border-radius: 12px;
             backdrop-filter: blur(4px);
@@ -242,8 +242,8 @@
 
         .product-title span {
             font-size: 0.8rem;
-            background: var(--netflix-red);
-            color: #ffffff;
+            background: var(--pubg-gold);
+            color: #000000;
             padding: 2px 8px;
             border-radius: 6px;
             font-weight: 800;
@@ -281,11 +281,11 @@
         .features-list li svg {
             width: 18px;
             height: 18px;
-            fill: var(--netflix-red);
+            fill: var(--pubg-gold);
             flex-shrink: 0;
         }
 
-        /* 5. Seleção de Planos */
+        /* 5. Seleção de Planos e Campo de Player ID */
         .plan-section {
             margin-bottom: 1.5rem;
             background-color: var(--bg-card);
@@ -301,6 +301,25 @@
             font-weight: 700;
             margin-bottom: 0.6rem;
             color: var(--text-main);
+        }
+
+        .custom-input {
+            width: 100%;
+            padding: 14px 16px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #ffffff;
+            background-color: var(--bg-dark);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            outline: none;
+            margin-bottom: 1.25rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .custom-input:focus {
+            border-color: var(--pubg-gold);
+            box-shadow: 0 0 10px var(--pubg-glow);
         }
 
         .custom-select-wrapper {
@@ -320,15 +339,15 @@
             outline: none;
             cursor: pointer;
             transition: border-color 0.2s, box-shadow 0.2s;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e50914' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23f59e0b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
             background-repeat: no-repeat;
             background-position: right 16px center;
             background-size: 18px;
         }
 
         .custom-select:focus {
-            border-color: var(--netflix-red);
-            box-shadow: 0 0 10px var(--netflix-glow);
+            border-color: var(--pubg-gold);
+            box-shadow: 0 0 10px var(--pubg-glow);
         }
 
         .custom-select option {
@@ -347,7 +366,7 @@
         }
 
         .estimated-price strong {
-            color: var(--netflix-red);
+            color: var(--pubg-gold);
             font-size: 1.25rem;
             font-weight: 800;
         }
@@ -363,14 +382,14 @@
             align-items: center;
             gap: 10px;
             width: 100%;
-            background: linear-gradient(135deg, #e50914 0%, #b9090b 100%);
-            color: #ffffff;
+            background: linear-gradient(135deg, var(--pubg-gold) 0%, var(--pubg-gold-hover) 100%);
+            color: #000000;
             text-align: center;
             padding: 18px;
             font-size: 1.15rem;
             font-weight: 800;
             border-radius: 14px;
-            box-shadow: 0 6px 20px var(--netflix-glow);
+            box-shadow: 0 6px 20px var(--pubg-glow);
             transition: all 0.2s ease;
             cursor: pointer;
             border: none;
@@ -380,7 +399,7 @@
 
         .buy-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(229, 9, 20, 0.5);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.6);
         }
 
         .buy-btn:active {
@@ -425,9 +444,9 @@
             display: inline-block;
             width: 4px;
             height: 18px;
-            background-color: var(--netflix-red);
+            background-color: var(--pubg-gold);
             border-radius: 4px;
-            box-shadow: 0 0 8px var(--netflix-red);
+            box-shadow: 0 0 8px var(--pubg-gold);
         }
 
         .description-section p {
@@ -503,7 +522,8 @@
         }
 
         .close-btn:hover {
-            background: rgba(229, 9, 20, 0.8);
+            background: rgba(245, 158, 11, 0.8);
+            color: #000000;
         }
 
         /* Container do Vídeo (Aspect Ratio 16:9) */
@@ -536,14 +556,14 @@
             align-items: center;
             padding: 1.5rem;
             text-align: center;
-            background: linear-gradient(135deg, #181818, #282828);
+            background: linear-gradient(135deg, #0f172a, #1e1b4b);
             color: var(--text-muted);
         }
 
         .video-placeholder svg {
             width: 48px;
             height: 48px;
-            fill: var(--netflix-red);
+            fill: var(--pubg-gold);
             margin-bottom: 12px;
         }
 
@@ -571,13 +591,13 @@
     <!-- 1. Cabeçalho Fixo -->
     <header>
         <a href="index.html" class="header-btn" title="Voltar ao início">←</a>
-        <h1>NETFLIX</h1>
+        <h1>PUBG MOBILE</h1>
         <a href="#" class="header-btn" title="Opções">⋮</a>
     </header>
 
     <!-- 2. Imagem / Banner de Destaque com Ação de Vídeo -->
     <div class="hero-banner" onclick="openVideoModal()">
-        <div class="badge-disponivel">Disponível</div>
+        <div class="badge-disponivel">Recarga por ID</div>
         <div class="play-container">
             <div class="play-icon">▶</div>
             <span class="play-text">Como funciona? Assista ao vídeo</span>
@@ -586,47 +606,52 @@
 
     <!-- 3. Selos de Confiança -->
     <div class="trust-badges-top">
-        <span>✅ Verificado</span>
-        <span>🔒 4K Ultra HD</span>
-        <span>⚡ Entrega Rápida</span>
+        <span>✅ ID Direto</span>
+        <span>⚡ Envio Instantâneo</span>
+        <span>🔒 100% Seguro</span>
     </div>
 
     <div class="content-padding">
         <!-- 4. Título e Descrição do Produto -->
         <div class="product-header">
-            <h2 class="product-title">NETFLIX <span>4K ULTRA HD</span></h2>
-            <p class="product-subtitle">Acesso a todo o catálogo da Netflix sem interrupções. Filmes, séries, animes e produções originais em altíssima definição!</p>
+            <h2 class="product-title">PUBG MOBILE <span>UC RECARGA</span></h2>
+            <p class="product-subtitle">Compre Unknown Cash (UC) para PUBG Mobile de forma rápida e segura. Adquira passes Royale, skins exclusivas e caixas de suprimentos!</p>
         </div>
         
         <ul class="features-list">
             <li>
                 <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                Compatível com Smart TV, Celular, Tablet e Computador.
+                Recarga direta no seu ID de Jogador (Character ID).
             </li>
             <li>
                 <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                Qualidade Ultra HD 4K com Áudio Spatial.
+                Sem necessidade de senha ou login da sua conta.
             </li>
             <li>
                 <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                Suporte e entrega garantida via WhatsApp.
+                Créditos caem na sua conta em minutos após confirmação.
             </li>
         </ul>
 
-        <!-- 5. Seleção de Planos (Dropdown Dinâmico) -->
+        <!-- 5. Seleção de Pacotes UC e Player ID -->
         <div class="plan-section">
-            <label class="plan-label" for="plano">Selecione a duração do seu acesso:</label>
+            <label class="plan-label" for="playerId">Informe o seu Player ID (Character ID):</label>
+            <input type="text" id="playerId" class="custom-input" placeholder="Ex: 5123456789" />
+
+            <label class="plan-label" for="plano">Selecione o pacote de UC desejado:</label>
             <div class="custom-select-wrapper">
                 <select id="plano" class="custom-select" onchange="atualizarPreco()">
-                    <option value="2000" data-tempo="1 Mês">1 Mês — 2.500 FCFA</option>
-                    <option value="5500" data-tempo="3 Meses">3 Meses — 7.500 FCFA</option>
-                    <option value="10000" data-tempo="6 Meses">6 Meses — 15.000 FCFA</option>
-                    <option value="18000" data-tempo="1 Ano">1 Ano — 30.000 FCFA</option>
+                    <option value="1000">60 UC — 1.000 FCFA</option>
+                    <option value="4500">325 UC (300 + 25 Bónus) — 4.500 FCFA</option>
+                    <option value="8500">660 UC (600 + 60 Bónus) — 8.500 FCFA</option>
+                    <option value="22000">1.800 UC (1500 + 300 Bónus) — 22.000 FCFA</option>
+                    <option value="45000">3.850 UC (3000 + 850 Bónus) — 45.000 FCFA</option>
+                    <option value="88000">8.100 UC (6000 + 2100 Bónus) — 88.000 FCFA</option>
                 </select>
             </div>
             <div class="estimated-price">
                 <span>Valor Total:</span>
-                <strong id="preco-display">2.000 FCFA</strong>
+                <strong id="preco-display">1.000 FCFA</strong>
             </div>
         </div>
 
@@ -637,16 +662,16 @@
                 COMPRAR AGORA
             </button>
             <div class="buy-trust-infos">
-                <span>📩 Ativação em até 6 Horas</span>
+                <span>📩 Ativação Imediata</span>
                 <span>🔒 Compra Garantida</span>
             </div>
         </div>
 
         <!-- 7. Secção de Descrição -->
         <div class="description-section">
-            <h3>Descrição do Produto</h3>
+            <h3>Como Funciona a Recarga?</h3>
             <p>
-                Tenha acesso ilimitado ao maior acervo de entretenimento do mundo. Assista aos filmes mais recentes, séries completas e documentários em qualidade 4K Ultra HD sem anúncios. A conta é entregue pronta com o seu perfil configurado e enviada diretamente para o seu WhatsApp logo após a confirmação do pagamento.
+                O procedimento é 100% oficial e seguro. Basta introduzir o seu ID de Jogador (número que se encontra no seu perfil do PUBG Mobile) e selecionar o pacote de UC. Assim que o pagamento for confirmado via WhatsApp, os Unknown Cash (UC) entram diretamente no seu inventário do jogo.
             </p>
         </div>
     </div>
@@ -655,7 +680,7 @@
     <div id="videoModal" class="modal-overlay" onclick="fecharModalFora(event)">
         <div class="modal-container">
             <div class="modal-header">
-                <h3 class="modal-title">Como funciona a Netflix Premium</h3>
+                <h3 class="modal-title">Como encontrar o ID e Recarregar</h3>
                 <button class="close-btn" onclick="closeVideoModal()">&times;</button>
             </div>
             <div class="video-wrapper">
@@ -686,14 +711,17 @@
             document.getElementById('preco-display').innerText = precoApenas.trim();
         }
 
-        // 2. Função de Compra e Redirecionamento Dinâmico para o WhatsApp
+        // 2. Função de Compra e Redirecionamento Dinâmico para o WhatsApp com ID do Jogador
         function comprarWhatsApp() {
             const select = document.getElementById('plano');
             const planoTexto = select.options[select.selectedIndex].text;
+            const playerIdInput = document.getElementById('playerId').value.trim();
             const numeroWhatsApp = "245955288370";
 
+            const idFormatado = playerIdInput ? playerIdInput : "Não informado na página (enviarei no chat)";
+
             // Mensagem formatada
-            const mensagem = `Olá! Gostaria de adquirir a *NETFLIX PREMIUM* no Bissau Mercado Digital.\n\n📌 *Plano Selecionado:* ${planoTexto}\n\nPor favor, envie-me as instruções para efetuar o pagamento.`;
+            const mensagem = `Olá! Gostaria de recarregar *PUBG MOBILE UC* no Bissau Mercado Digital.\n\n📌 *Pacote UC:* ${planoTexto}\n🎮 *Player ID:* ${idFormatado}\n\nPor favor, envie-me as instruções de pagamento.`;
 
             // Gerar Link URL
             const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;

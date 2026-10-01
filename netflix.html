@@ -3,37 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NETFLIX PREMIUM - Bissau Mercado Digital</title>
+    <title>Netflix 4K Ultra HD - Mercado Digital Bissau</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <style>
-        /* Esconder selo Netlify */
         #netlify-badge, .netlify-badge, a[href*="netlify.com"] {
             display: none !important;
-            visibility: hidden !important;
-            opacity: 0 !important;
-            pointer-events: none !important;
         }
 
-        /* Variáveis de Cores do Tema NETFLIX */
         :root {
-            --bg-dark: #141414;
-            --bg-card: #1f1f1f;
-            --bg-card-hover: #2a2a2a;
-            --netflix-red: #e50914;
-            --netflix-red-hover: #b9090b;
-            --netflix-glow: rgba(229, 9, 20, 0.35);
+            --bg-dark: #090d16;
+            --bg-card: #121926;
+            --bg-card-hover: #1c273e;
+            --primary: #7c3aed;
+            --primary-glow: rgba(124, 58, 237, 0.4);
+            --orange: #ff6600;
+            --orange-glow: rgba(255, 102, 0, 0.4);
             --text-main: #ffffff;
-            --text-muted: #a3a3a3;
+            --text-muted: #94a3b8;
             --success: #10b981;
-            --border: #2d2d2d;
-            --border-highlight: rgba(229, 9, 20, 0.3);
+            --border: #1e293b;
+            --border-highlight: rgba(124, 58, 237, 0.35);
         }
 
-        /* Reset Global */
         * {
             margin: 0;
             padding: 0;
@@ -45,8 +40,13 @@
             background-color: var(--bg-dark);
             color: var(--text-main);
             line-height: 1.5;
-            -webkit-font-smoothing: antialiased;
-            padding-bottom: 50px;
+            padding-bottom: 100px;
+            
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         a {
@@ -54,669 +54,482 @@
             color: inherit;
         }
 
-        /* 1. Cabeçalho Fixo Premium */
-        header {
+        /* Top Bar */
+        .top-bar {
+            background: rgba(9, 13, 22, 0.92);
+            backdrop-filter: blur(12px);
+            padding: 1rem;
             position: sticky;
             top: 0;
-            background: rgba(20, 20, 20, 0.9);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 1.25rem;
-            border-bottom: 1px solid var(--border);
             z-index: 100;
-        }
-
-        .header-btn {
-            font-size: 22px;
-            font-weight: bold;
-            color: var(--text-main);
-            width: 38px;
-            height: 38px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.05);
-            transition: background 0.2s;
-        }
-
-        .header-btn:hover {
-            background: rgba(229, 9, 20, 0.2);
-            color: var(--netflix-red);
-        }
-
-        header h1 {
-            font-size: 1.1rem;
-            font-weight: 800;
-            letter-spacing: 1px;
-            color: var(--netflix-red);
-            text-shadow: 0 0 12px var(--netflix-glow);
-        }
-
-        /* 2. Banner de Destaque Estilo Netflix */
-        .hero-banner {
-            position: relative;
-            height: 250px;
-            background: linear-gradient(180deg, rgba(20,20,20,0.2) 0%, rgba(20,20,20,0.95) 100%), 
-                        url('https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=1200&auto=format&fit=crop') center/cover no-repeat;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             border-bottom: 1px solid var(--border);
-            cursor: pointer;
-            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
-        .hero-banner::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at center, rgba(229, 9, 20, 0.15) 0%, transparent 70%);
-        }
-
-        .badge-disponivel {
-            position: absolute;
-            top: 16px;
-            left: 16px;
-            background-color: var(--success);
-            color: #ffffff;
-            font-size: 0.75rem;
-            font-weight: 700;
-            padding: 6px 14px;
-            border-radius: 20px;
-            box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+        .back-btn {
             display: flex;
             align-items: center;
             gap: 6px;
-            z-index: 2;
-        }
-
-        .badge-disponivel::before {
-            content: '';
-            width: 8px;
-            height: 8px;
-            background: #fff;
-            border-radius: 50%;
-            display: inline-block;
-            animation: pulse 1.5s infinite;
-        }
-
-        /* Botão Play */
-        .play-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            z-index: 2;
-            transition: transform 0.3s ease;
-        }
-
-        .hero-banner:hover .play-container {
-            transform: scale(1.08);
-        }
-
-        .play-icon {
-            width: 72px;
-            height: 72px;
-            background: linear-gradient(135deg, var(--netflix-red), var(--netflix-red-hover));
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 28px;
-            color: #ffffff;
-            box-shadow: 0 0 25px var(--netflix-glow);
-            padding-left: 5px;
-            position: relative;
-        }
-
-        .play-icon::after {
-            content: '';
-            position: absolute;
-            inset: -6px;
-            border: 2px solid var(--netflix-red);
-            border-radius: 50%;
-            opacity: 0.6;
-            animation: ping 2s infinite;
-        }
-
-        .play-text {
-            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
             font-weight: 700;
-            letter-spacing: 0.5px;
-            color: #ffffff;
-            text-transform: uppercase;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 4px 12px;
-            border-radius: 12px;
-            backdrop-filter: blur(4px);
         }
 
-        /* Conteúdo Principal */
-        .content-padding {
-            padding: 1.5rem 1.25rem;
+        .page-title {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        .icon-cart-link {
+            position: relative;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-badge-count {
+            position: absolute;
+            top: -6px;
+            right: -8px;
+            background-color: var(--orange);
+            color: #ffffff;
+            font-size: 0.6rem;
+            font-weight: 800;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 6px var(--orange-glow);
+        }
+
+        .container {
+            padding: 1rem;
             max-width: 600px;
             margin: 0 auto;
         }
 
-        /* 3. Selos de Confiança */
-        .trust-badges-top {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
+        /* Hero Product Card */
+        .product-hero {
             background-color: var(--bg-card);
-            padding: 0.85rem 1rem;
-            margin: -35px auto 1.5rem auto;
-            border-radius: 16px;
-            position: relative;
-            z-index: 10;
+            border-radius: 20px;
             border: 1px solid var(--border-highlight);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+            overflow: hidden;
+            margin-bottom: 1.25rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
         }
 
-        .trust-badges-top span {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--text-main);
+        .product-banner {
+            height: 160px;
+            background: linear-gradient(180deg, rgba(9, 13, 22, 0.2) 0%, var(--bg-card) 100%),
+                        url('https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?q=80&w=600&auto=format&fit=crop') center/cover no-repeat;
+            position: relative;
             display: flex;
-            align-items: center;
-            gap: 6px;
+            align-items: flex-end;
+            padding: 1rem;
         }
 
-        /* 4. Título e Descrição */
-        .product-header {
+        .product-hero-info {
+            padding: 1.1rem;
+        }
+
+        .product-hero-info h2 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 0.3rem;
+        }
+
+        .product-hero-info p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* Form Inputs */
+        .input-card {
+            background-color: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            padding: 1.1rem;
             margin-bottom: 1.25rem;
         }
 
-        .product-title {
-            font-size: 1.75rem;
+        .input-card-title {
+            font-size: 0.95rem;
             font-weight: 800;
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .product-title span {
-            font-size: 0.8rem;
-            background: var(--netflix-red);
-            color: #ffffff;
-            padding: 2px 8px;
-            border-radius: 6px;
-            font-weight: 800;
-            text-transform: uppercase;
-        }
-
-        .product-subtitle {
-            font-size: 0.92rem;
-            color: var(--text-muted);
-            margin-top: 0.4rem;
-        }
-
-        /* Lista de Recursos */
-        .features-list {
-            list-style: none;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 10px;
-            margin-bottom: 1.5rem;
-        }
-
-        .features-list li {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--text-main);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background-color: var(--bg-card);
-            padding: 10px 14px;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-        }
-
-        .features-list li svg {
-            width: 18px;
-            height: 18px;
-            fill: var(--netflix-red);
-            flex-shrink: 0;
-        }
-
-        /* 5. Seleção de Planos */
-        .plan-section {
-            margin-bottom: 1.5rem;
-            background-color: var(--bg-card);
-            padding: 1.25rem;
-            border-radius: 16px;
-            border: 1px solid var(--border-highlight);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-
-        .plan-label {
-            display: block;
-            font-size: 0.88rem;
-            font-weight: 700;
-            margin-bottom: 0.6rem;
-            color: var(--text-main);
-        }
-
-        .custom-select-wrapper {
-            position: relative;
-        }
-
-        .custom-select {
-            width: 100%;
-            padding: 14px 16px;
-            font-size: 1rem;
-            font-weight: 700;
-            color: #ffffff;
-            background-color: var(--bg-dark);
-            border: 2px solid var(--border);
-            border-radius: 12px;
-            appearance: none;
-            outline: none;
-            cursor: pointer;
-            transition: border-color 0.2s, box-shadow 0.2s;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e50914' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right 16px center;
-            background-size: 18px;
-        }
-
-        .custom-select:focus {
-            border-color: var(--netflix-red);
-            box-shadow: 0 0 10px var(--netflix-glow);
-        }
-
-        .custom-select option {
-            background-color: var(--bg-card);
-            color: #ffffff;
-        }
-
-        .estimated-price {
-            margin-top: 1rem;
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: var(--text-muted);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .estimated-price strong {
-            color: var(--netflix-red);
-            font-size: 1.25rem;
-            font-weight: 800;
-        }
-
-        /* 6. Botão de Compra WhatsApp */
-        .buy-action {
-            margin-bottom: 2rem;
-        }
-
-        .buy-btn {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            width: 100%;
-            background: linear-gradient(135deg, #e50914 0%, #b9090b 100%);
-            color: #ffffff;
-            text-align: center;
-            padding: 18px;
-            font-size: 1.15rem;
-            font-weight: 800;
-            border-radius: 14px;
-            box-shadow: 0 6px 20px var(--netflix-glow);
-            transition: all 0.2s ease;
-            cursor: pointer;
-            border: none;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .buy-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(229, 9, 20, 0.5);
-        }
-
-        .buy-btn:active {
-            transform: translateY(0);
-        }
-
-        .buy-trust-infos {
-            display: flex;
-            justify-content: center;
-            gap: 18px;
-            margin-top: 14px;
-        }
-
-        .buy-trust-infos span {
-            font-size: 0.78rem;
-            color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        /* 7. Descrição do Produto */
-        .description-section {
-            background-color: var(--bg-card);
-            padding: 1.25rem;
-            border-radius: 16px;
-            border: 1px solid var(--border);
-        }
-
-        .description-section h3 {
-            font-size: 1.05rem;
-            font-weight: 700;
-            margin-bottom: 0.8rem;
-            color: #ffffff;
+            margin-bottom: 0.85rem;
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
-        .description-section h3::before {
-            content: "";
-            display: inline-block;
-            width: 4px;
-            height: 18px;
-            background-color: var(--netflix-red);
-            border-radius: 4px;
-            box-shadow: 0 0 8px var(--netflix-red);
+        .form-group {
+            margin-bottom: 0.85rem;
         }
 
-        .description-section p {
-            font-size: 0.88rem;
-            color: var(--text-muted);
-            line-height: 1.65;
-        }
-
-        /* 8. MODAL DE VÍDEO EXPLICATIVO */
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.88);
-            backdrop-filter: blur(8px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            padding: 1rem;
-        }
-
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .modal-container {
-            background: var(--bg-card);
-            border: 1px solid var(--border-highlight);
-            border-radius: 20px;
-            width: 100%;
-            max-width: 560px;
-            padding: 1.25rem;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
-            transform: scale(0.9);
-            transition: transform 0.3s ease;
-            position: relative;
-        }
-
-        .modal-overlay.active .modal-container {
-            transform: scale(1);
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .modal-title {
-            font-size: 1.1rem;
+        .form-group label {
+            display: block;
+            font-size: 0.78rem;
             font-weight: 700;
-            color: #ffffff;
+            color: var(--text-muted);
+            margin-bottom: 0.35rem;
         }
 
-        .close-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
+        .form-input {
+            width: 100%;
+            padding: 11px 13px;
+            background-color: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: 10px;
             color: #ffffff;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            font-size: 18px;
-            cursor: pointer;
+            font-size: 0.88rem;
+            font-weight: 600;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus {
+            border-color: var(--orange);
+        }
+
+        /* Package Grid Selection */
+        .packages-title {
+            font-size: 0.95rem;
+            font-weight: 800;
+            margin-bottom: 0.85rem;
             display: flex;
             align-items: center;
-            justify-content: center;
-            transition: background 0.2s;
+            gap: 8px;
         }
 
-        .close-btn:hover {
-            background: rgba(229, 9, 20, 0.8);
+        .package-grid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 10px;
+            margin-bottom: 1.25rem;
         }
 
-        /* Container do Vídeo (Aspect Ratio 16:9) */
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 */
-            height: 0;
-            border-radius: 12px;
-            overflow: hidden;
-            background: #000;
-            border: 1px solid var(--border);
+        .pkg-card {
+            background-color: var(--bg-card);
+            border: 2px solid var(--border);
+            border-radius: 14px;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: all 0.2s;
         }
 
-        .video-wrapper iframe, .video-wrapper video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
+        .pkg-card.selected {
+            border-color: var(--orange);
+            background-color: rgba(255, 102, 0, 0.08);
+            box-shadow: 0 0 15px var(--orange-glow);
         }
 
-        /* Placeholder explicativo do vídeo */
-        .video-placeholder {
-            position: absolute;
-            inset: 0;
+        .pkg-info {
+            text-align: left;
+        }
+
+        .pkg-title {
+            font-size: 0.98rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        .pkg-sub {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 0.2rem;
+        }
+
+        .pkg-price {
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--orange);
+            white-space: nowrap;
+        }
+
+        /* Action Buttons */
+        .action-container {
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 1.5rem;
-            text-align: center;
-            background: linear-gradient(135deg, #181818, #282828);
-            color: var(--text-muted);
+            gap: 10px;
+            margin-bottom: 1.25rem;
         }
 
-        .video-placeholder svg {
-            width: 48px;
-            height: 48px;
-            fill: var(--netflix-red);
-            margin-bottom: 12px;
-        }
-
-        .video-placeholder p {
-            font-size: 0.85rem;
+        .btn-add-cart {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary), #5b21b6);
             color: #ffffff;
-            margin-top: 6px;
+            border: none;
+            padding: 13px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 0.88rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px var(--primary-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-transform: uppercase;
         }
 
-        /* Animações Keyframes */
-        @keyframes pulse {
-            0% { transform: scale(0.95); opacity: 0.8; }
-            50% { transform: scale(1.1); opacity: 1; }
-            100% { transform: scale(0.95); opacity: 0.8; }
+        .btn-buy-wa {
+            width: 100%;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: #ffffff;
+            border: none;
+            padding: 13px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 0.88rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-transform: uppercase;
         }
 
-        @keyframes ping {
-            0% { transform: scale(1); opacity: 0.8; }
-            100% { transform: scale(1.4); opacity: 0; }
+        .btn-add-cart:active, .btn-buy-wa:active {
+            transform: scale(0.98);
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background-color: var(--success);
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 800;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* Navigation Inferior */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(18, 25, 38, 0.95);
+            backdrop-filter: blur(12px);
+            display: flex;
+            justify-content: space-around;
+            padding: 0.65rem 0;
+            border-top: 1px solid var(--border);
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            gap: 0.2rem;
+        }
+
+        .nav-item.active {
+            color: var(--orange);
+        }
+
+        .nav-icon {
+            font-size: 1.2rem;
         }
     </style>
 </head>
 <body>
 
-    <!-- 1. Cabeçalho Fixo -->
-    <header>
-        <a href="index.html" class="header-btn" title="Voltar ao início">←</a>
-        <h1>NETFLIX</h1>
-        <a href="#" class="header-btn" title="Opções">⋮</a>
-    </header>
-
-    <!-- 2. Imagem / Banner de Destaque com Ação de Vídeo -->
-    <div class="hero-banner" onclick="openVideoModal()">
-        <div class="badge-disponivel">Disponível</div>
-        <div class="play-container">
-            <div class="play-icon">▶</div>
-            <span class="play-text">Como funciona? Assista ao vídeo</span>
-        </div>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <a href="index.html" class="back-btn">
+            ‹ Voltar
+        </a>
+        <h1 class="page-title">Netflix Premium</h1>
+        <a href="carrinho.html" class="icon-cart-link">
+            🛒
+            <span class="cart-badge-count" id="cartBadge">0</span>
+        </a>
     </div>
 
-    <!-- 3. Selos de Confiança -->
-    <div class="trust-badges-top">
-        <span>✅ Verificado</span>
-        <span>🔒 4K Ultra HD</span>
-        <span>⚡ Entrega Rápida</span>
-    </div>
-
-    <div class="content-padding">
-        <!-- 4. Título e Descrição do Produto -->
-        <div class="product-header">
-            <h2 class="product-title">NETFLIX <span>4K ULTRA HD</span></h2>
-            <p class="product-subtitle">Acesso a todo o catálogo da Netflix sem interrupções. Filmes, séries, animes e produções originais em altíssima definição!</p>
-        </div>
-        
-        <ul class="features-list">
-            <li>
-                <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                Compatível com Smart TV, Celular, Tablet e Computador.
-            </li>
-            <li>
-                <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                Qualidade Ultra HD 4K com Áudio Spatial.
-            </li>
-            <li>
-                <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                Suporte e entrega garantida via WhatsApp.
-            </li>
-        </ul>
-
-        <!-- 5. Seleção de Planos (Dropdown Dinâmico) -->
-        <div class="plan-section">
-            <label class="plan-label" for="plano">Selecione a duração do seu acesso:</label>
-            <div class="custom-select-wrapper">
-                <select id="plano" class="custom-select" onchange="atualizarPreco()">
-                    <option value="2000" data-tempo="1 Mês">1 Mês — 2.500 FCFA</option>
-                    <option value="5500" data-tempo="3 Meses">3 Meses — 7.500 FCFA</option>
-                    <option value="10000" data-tempo="6 Meses">6 Meses — 15.000 FCFA</option>
-                    <option value="18000" data-tempo="1 Ano">1 Ano — 30.000 FCFA</option>
-                </select>
-            </div>
-            <div class="estimated-price">
-                <span>Valor Total:</span>
-                <strong id="preco-display">2.000 FCFA</strong>
+    <div class="container">
+        <!-- Hero Banner -->
+        <div class="product-hero">
+            <div class="product-banner"></div>
+            <div class="product-hero-info">
+                <h2>Netflix 4K Ultra HD 🎬</h2>
+                <p>Assista aos seus filmes e séries favoritos com qualidade máxima 4K Ultra HD, sem interrupções e com perfil individual PIN.</p>
             </div>
         </div>
 
-        <!-- 6. Botão de Compra Dinâmico para WhatsApp -->
-        <div class="buy-action">
-            <button class="buy-btn" onclick="comprarWhatsApp()">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
-                COMPRAR AGORA
-            </button>
-            <div class="buy-trust-infos">
-                <span>📩 Ativação em até 6 Horas</span>
-                <span>🔒 Compra Garantida</span>
+        <!-- Dados do Cliente -->
+        <div class="input-card">
+            <h3 class="input-card-title">1. Dados para Entrega</h3>
+            <div class="form-group">
+                <label for="clientName">Seu Nome / Nome para o Perfil *</label>
+                <input type="text" id="clientName" class="form-input" placeholder="Ex: Mamadu Jalo" required>
+            </div>
+            <div class="form-group">
+                <label for="clientWhatsApp">Nº de WhatsApp para Envio do Acesso *</label>
+                <input type="tel" id="clientWhatsApp" class="form-input" placeholder="Ex: 955288370" required>
             </div>
         </div>
 
-        <!-- 7. Secção de Descrição -->
-        <div class="description-section">
-            <h3>Descrição do Produto</h3>
-            <p>
-                Tenha acesso ilimitado ao maior acervo de entretenimento do mundo. Assista aos filmes mais recentes, séries completas e documentários em qualidade 4K Ultra HD sem anúncios. A conta é entregue pronta com o seu perfil configurado e enviada diretamente para o seu WhatsApp logo após a confirmação do pagamento.
-            </p>
-        </div>
-    </div>
-
-    <!-- 8. MODAL DE VÍDEO EXPLICATIVO -->
-    <div id="videoModal" class="modal-overlay" onclick="fecharModalFora(event)">
-        <div class="modal-container">
-            <div class="modal-header">
-                <h3 class="modal-title">Como funciona a Netflix Premium</h3>
-                <button class="close-btn" onclick="closeVideoModal()">&times;</button>
-            </div>
-            <div class="video-wrapper">
-                
-                <!-- ==================================================================== -->
-                <!-- 💡 COLOQUE AQUI O SEU CÓDIGO/LINK DE VÍDEO DO YOUTUBE OU VIMEO      -->
-                <!-- Exemplo para YouTube Embed:                                          -->
-                <!-- <iframe src="https://www.youtube.com/embed/SEU_CODIGO_AQUI?autoplay=1" allow="autoplay; encrypted-media" allowfullscreen></iframe> -->
-                <!-- ==================================================================== -->
-
-                <div class="video-placeholder">
-                    <svg viewBox="0 0 24 24"><path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7L9.5 11l-2.5 3H17l-3-4z"/></svg>
-                    <strong>Espaço do Vídeo Explicativo</strong>
-                    <p>Substitua este aviso com a URL do seu vídeo no código fonte (linha comentada como "COLOQUE AQUI O SEU LINK").</p>
+        <!-- Seleção do Plano -->
+        <div class="packages-title">2. Escolha o Plano Desejado</div>
+        <div class="package-grid">
+            <div class="pkg-card selected" onclick="selectPackage(this, '1 Tela / Ecrã Ultra HD (1 Mês)', 3000)">
+                <div class="pkg-info">
+                    <div class="pkg-title">📺 1 Ecrã / Tela 4K Ultra HD</div>
+                    <div class="pkg-sub">Acesso individual com PIN privativo | 30 Dias</div>
                 </div>
-
+                <div class="pkg-price">3.000 FCFA</div>
             </div>
+
+            <div class="pkg-card" onclick="selectPackage(this, '2 Telas / Ecrãs Ultra HD (1 Mês)', 5500)">
+                <div class="pkg-info">
+                    <div class="pkg-title">📺 2 Ecrãs / Telas 4K Ultra HD</div>
+                    <div class="pkg-sub">Dois perfis individuais com PIN | 30 Dias</div>
+                </div>
+                <div class="pkg-price">5.500 FCFA</div>
+            </div>
+
+            <div class="pkg-card" onclick="selectPackage(this, 'Conta Completa Privada (1 Mês)', 10000)">
+                <div class="pkg-info">
+                    <div class="pkg-title">👑 Conta Completa Privada (5 Perfis)</div>
+                    <div class="pkg-sub">Controlo total da conta no seu e-mail | 30 Dias</div>
+                </div>
+                <div class="pkg-price">10.000 FCFA</div>
+            </div>
+        </div>
+
+        <!-- Botões de Ação -->
+        <div class="action-container">
+            <button class="btn-add-cart" onclick="addToCart()">
+                🛒 Adicionar ao Carrinho
+            </button>
+            <button class="btn-buy-wa" onclick="buyDirectWhatsApp()">
+                💬 Comprar Directo no WhatsApp
+            </button>
         </div>
     </div>
 
-    <!-- SCRIPT DE INTERAÇÕES E WHATSAPP -->
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">Item adicionado ao carrinho!</div>
+
+    <!-- Navegação Inferior -->
+    <div class="bottom-nav">
+        <a href="index.html" class="nav-item active"><span class="nav-icon">🏠</span><span>Loja</span></a>
+        <a href="pedidos.html" class="nav-item"><span class="nav-icon">📦</span><span>Pedidos</span></a>
+        <a href="carrinho.html" class="nav-item"><span class="nav-icon">🛒</span><span>Carrinho</span></a>
+        <a href="conta.html" class="nav-item"><span class="nav-icon">👤</span><span>Conta</span></a>
+        <a href="https://wa.me/245955288370?text=Ol%C3%A1!%20Preciso%20de%20ajuda." target="_blank" class="nav-item"><span class="nav-icon">💬</span><span>Ajuda</span></a>
+    </div>
+
     <script>
-        // 1. Atualizar Preço em Tela
-        function atualizarPreco() {
-            const select = document.getElementById('plano');
-            const opcaoSelecionada = select.options[select.selectedIndex].text;
-            const precoApenas = opcaoSelecionada.split('—')[1] || select.value + ' FCFA';
-            document.getElementById('preco-display').innerText = precoApenas.trim();
+        let selectedLabel = '1 Tela / Ecrã Ultra HD (1 Mês)';
+        let selectedPrice = 3000;
+
+        function selectPackage(element, label, price) {
+            document.querySelectorAll('.pkg-card').forEach(card => card.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedLabel = label;
+            selectedPrice = price;
         }
 
-        // 2. Função de Compra e Redirecionamento Dinâmico para o WhatsApp
-        function comprarWhatsApp() {
-            const select = document.getElementById('plano');
-            const planoTexto = select.options[select.selectedIndex].text;
-            const numeroWhatsApp = "245955288370";
-
-            // Mensagem formatada
-            const mensagem = `Olá! Gostaria de adquirir a *NETFLIX PREMIUM* no Bissau Mercado Digital.\n\n📌 *Plano Selecionado:* ${planoTexto}\n\nPor favor, envie-me as instruções para efetuar o pagamento.`;
-
-            // Gerar Link URL
-            const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
-
-            // Abrir WhatsApp em nova aba
-            window.open(urlWhatsApp, '_blank');
-        }
-
-        // 3. Abrir e Fechar Modal de Vídeo
-        function openVideoModal() {
-            document.getElementById('videoModal').classList.add('active');
-        }
-
-        function closeVideoModal() {
-            document.getElementById('videoModal').classList.remove('active');
-        }
-
-        function fecharModalFora(event) {
-            const modal = document.getElementById('videoModal');
-            if (event.target === modal) {
-                closeVideoModal();
+        function updateCartBadge() {
+            try {
+                const cart = JSON.parse(localStorage.getItem('bissau_cart')) || [];
+                const totalItens = cart.reduce((sum, item) => sum + (item.quantidade || 1), 0);
+                document.getElementById('cartBadge').innerText = totalItens;
+            } catch (e) {
+                console.error(e);
             }
         }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.innerText = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+
+        function addToCart() {
+            const name = document.getElementById('clientName').value.trim();
+            const wa = document.getElementById('clientWhatsApp').value.trim();
+
+            if (!name || !wa) {
+                alert("Por favor, preencha o seu Nome e Número de WhatsApp!");
+                document.getElementById('clientName').focus();
+                return;
+            }
+
+            const cart = JSON.parse(localStorage.getItem('bissau_cart')) || [];
+
+            const newItem = {
+                id: 'netflix_' + Date.now(),
+                nome: 'Netflix 4K - ' + selectedLabel,
+                opcao: 'Cliente: ' + name + ' | WA: ' + wa,
+                price: selectedPrice,
+                quantidade: 1,
+                img: 'https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?q=80&w=200'
+            };
+
+            cart.push(newItem);
+            localStorage.setItem('bissau_cart', JSON.stringify(cart));
+
+            updateCartBadge();
+            showToast("✅ Netflix adicionado ao carrinho!");
+        }
+
+        function buyDirectWhatsApp() {
+            const name = document.getElementById('clientName').value.trim();
+            const wa = document.getElementById('clientWhatsApp').value.trim();
+
+            if (!name || !wa) {
+                alert("Por favor, preencha o seu Nome e Número de WhatsApp!");
+                document.getElementById('clientName').focus();
+                return;
+            }
+
+            let text = `🎬 *PEDIDO DIRETO - NETFLIX 4K ULTRA HD*\n`;
+            text += `--------------------------------\n`;
+            text += `📦 *Plano:* ${selectedLabel}\n`;
+            text += `💰 *Valor:* ${selectedPrice.toLocaleString()} FCFA\n`;
+            text += `👤 *Nome:* ${name}\n`;
+            text += `📱 *Contacto WhatsApp:* ${wa}\n`;
+            text += `--------------------------------\n`;
+            text += `💳 *Método:* Orange Money (955288370)\n`;
+            text += `Aguardando confirmação para ativação da conta.`;
+
+            const waUrl = `https://wa.me/245955288370?text=${encodeURIComponent(text)}`;
+            window.open(waUrl, '_blank');
+        }
+
+        document.addEventListener('DOMContentLoaded', updateCartBadge);
     </script>
 </body>
 </html>

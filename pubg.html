@@ -109,10 +109,12 @@
         }
 
         .container {
-            padding: 1rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
+    padding: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+    animation: fadeIn 0.25s ease-out;
+}
+
 
         /* Hero Product Card */
         .product-hero {
@@ -327,18 +329,22 @@
 
         /* Navigation Inferior */
         .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(18, 25, 38, 0.95);
-            backdrop-filter: blur(12px);
-            display: flex;
-            justify-content: space-around;
-            padding: 0.65rem 0;
-            border-top: 1px solid var(--border);
-            z-index: 100;
-        }
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(18, 25, 38, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    justify-content: space-around;
+    padding: 0.65rem 0;
+    border-top: 1px solid var(--border);
+    z-index: 1000;
+    transform: translateZ(0);
+    will-change: transform;
+}
+
 
         .nav-item {
             display: flex;
@@ -392,36 +398,36 @@
             </div>
             <div class="form-group">
                 <label for="playerName">Nome no Jogo (Opcional)</label>
-                <input type="text" id="playerName" class="form-input" placeholder="Ex: DU JALO">
+                <input type="text" id="playerName" class="form-input" placeholder="Ex: du_black123">
             </div>
         </div>
 
         <!-- Seleção de Pacote -->
         <div class="packages-title">2. Escolha a Quantidade de UC</div>
         <div class="package-grid">
-            <div class="pkg-card selected" onclick="selectPackage(this, 60, 1000)">
+            <div class="pkg-card selected" onclick="selectPackage(this, 60, 800)">
                 <div class="pkg-uc">60 UC</div>
-                <div class="pkg-price">1.000 FCFA</div>
+                <div class="pkg-price">800 FCFA</div>
             </div>
-            <div class="pkg-card" onclick="selectPackage(this, 325, 4500)">
+            <div class="pkg-card" onclick="selectPackage(this, 325, 3500)">
                 <div class="pkg-uc">325 UC</div>
-                <div class="pkg-price">4.500 FCFA</div>
+                <div class="pkg-price">3.500 FCFA</div>
             </div>
-            <div class="pkg-card" onclick="selectPackage(this, 660, 8500)">
+            <div class="pkg-card" onclick="selectPackage(this, 660, 6500)">
                 <div class="pkg-uc">660 UC</div>
-                <div class="pkg-price">8.500 FCFA</div>
+                <div class="pkg-price">6.500 FCFA</div>
             </div>
-            <div class="pkg-card" onclick="selectPackage(this, 1800, 22000)">
+            <div class="pkg-card" onclick="selectPackage(this, 1800, 15000)">
                 <div class="pkg-uc">1.800 UC</div>
-                <div class="pkg-price">22.000 FCFA</div>
+                <div class="pkg-price">15.000 FCFA</div>
             </div>
-            <div class="pkg-card" onclick="selectPackage(this, 3850, 43000)">
+            <div class="pkg-card" onclick="selectPackage(this, 3850, 29500)">
                 <div class="pkg-uc">3.850 UC</div>
-                <div class="pkg-price">43.000 FCFA</div>
+                <div class="pkg-price">29.500 FCFA</div>
             </div>
-            <div class="pkg-card" onclick="selectPackage(this, 8100, 85000)">
+            <div class="pkg-card" onclick="selectPackage(this, 8100, 63000)">
                 <div class="pkg-uc">8.100 UC</div>
-                <div class="pkg-price">85.000 FCFA</div>
+                <div class="pkg-price">63.000 FCFA</div>
             </div>
         </div>
 
@@ -450,7 +456,7 @@
 
     <script>
         let selectedUC = 60;
-        let selectedPrice = 1000;
+        let selectedPrice = 800;
 
         function selectPackage(element, uc, price) {
             document.querySelectorAll('.pkg-card').forEach(card => card.classList.remove('selected'));

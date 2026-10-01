@@ -110,10 +110,12 @@
         }
 
         .container {
-            padding: 1rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
+    padding: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+    animation: fadeIn 0.25s ease-out;
+}
+
 
         /* Hero Product Card */
         .product-hero {
@@ -334,18 +336,22 @@
 
         /* Navigation Inferior */
         .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(18, 25, 38, 0.95);
-            backdrop-filter: blur(12px);
-            display: flex;
-            justify-content: space-around;
-            padding: 0.65rem 0;
-            border-top: 1px solid var(--border);
-            z-index: 100;
-        }
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(18, 25, 38, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    justify-content: space-around;
+    padding: 0.65rem 0;
+    border-top: 1px solid var(--border);
+    z-index: 1000;
+    transform: translateZ(0);
+    will-change: transform;
+}
+
 
         .nav-item {
             display: flex;
@@ -399,7 +405,7 @@
             </div>
             <div class="form-group">
                 <label for="clientWhatsApp">Nº de WhatsApp para Contacto *</label>
-                <input type="tel" id="clientWhatsApp" class="form-input" placeholder="Ex: 955288370" required>
+                <input type="tel" id="clientWhatsApp" class="form-input" placeholder="Ex: 95/96-5555555" required>
             </div>
             <div class="form-group">
                 <label for="projectDesc">Resumo do Projeto / Ideia (Opcional)</label>
@@ -426,12 +432,12 @@
                 <div class="pkg-price">65.000 FCFA</div>
             </div>
 
-            <div class="pkg-card" onclick="selectPackage(this, 'Loja Virtual E-Commerce', 95000)">
+            <div class="pkg-card" onclick="selectPackage(this, 'Loja Virtual E-Commerce', 50000)">
                 <div class="pkg-info">
                     <div class="pkg-title">🛍️ Loja Virtual / E-Commerce</div>
                     <div class="pkg-sub">Catálogo de produtos com carrinho de compras integrado</div>
                 </div>
-                <div class="pkg-price">95.000 FCFA</div>
+                <div class="pkg-price">50.000 FCFA</div>
             </div>
 
             <div class="pkg-card" onclick="selectPackage(this, 'Sistema Web / App Sob Medida', 0)">

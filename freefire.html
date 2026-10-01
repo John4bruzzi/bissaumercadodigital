@@ -108,10 +108,12 @@
         }
 
         .container {
-            padding: 1rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
+    padding: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+    animation: fadeIn 0.25s ease-out;
+}
+
 
         /* Hero Product Card */
         .product-hero {
@@ -320,18 +322,22 @@
 
         /* Navigation Inferior */
         .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(18, 25, 38, 0.95);
-            backdrop-filter: blur(12px);
-            display: flex;
-            justify-content: space-around;
-            padding: 0.65rem 0;
-            border-top: 1px solid var(--border);
-            z-index: 100;
-        }
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(18, 25, 38, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    justify-content: space-around;
+    padding: 0.65rem 0;
+    border-top: 1px solid var(--border);
+    z-index: 1000;
+    transform: translateZ(0);
+    will-change: transform;
+}
+
 
         .nav-item {
             display: flex;
@@ -385,37 +391,34 @@
             </div>
             <div class="form-group">
                 <label for="playerName">Nome no Jogo (Opcional)</label>
-                <input type="text" id="playerName" class="form-input" placeholder="Ex: DU JALO">
+                <input type="text" id="playerName" class="form-input" placeholder="Ex: du_black123">
             </div>
         </div>
 
         <!-- Seleção de Pacote -->
         <div class="packages-title">2. Escolha a Quantidade de Diamantes</div>
         <div class="package-grid">
-            <div class="pkg-card selected" onclick="selectPackage(this, '100 Diamantes', 1000)">
-                <div class="pkg-title">💎 100</div>
-                <div class="pkg-price">1.000 FCFA</div>
+            <div class="pkg-card selected" onclick="selectPackage(this, '100 Diamantes', 750)">
+                <div class="pkg-title">💎 100+</div>
+                <div class="pkg-price">750 FCFA</div>
             </div>
-            <div class="pkg-card" onclick="selectPackage(this, '310 Diamantes', 2800)">
-                <div class="pkg-title">💎 310</div>
-                <div class="pkg-price">2.800 FCFA</div>
+            <div class="pkg-card" onclick="selectPackage(this, '210 Diamantes', 1400)">
+                <div class="pkg-title">💎 210+</div>
+                <div class="pkg-price">1.400 FCFA</div>
             </div>
-            <div class="pkg-card" onclick="selectPackage(this, '520 Diamantes', 4500)">
-                <div class="pkg-title">💎 520</div>
-                <div class="pkg-price">4.500 FCFA</div>
+            <div class="pkg-card" onclick="selectPackage(this, '530 Diamantes', 3500)">
+                <div class="pkg-title">💎 530+</div>
+                <div class="pkg-price">3.500 FCFA</div>
             </div>
-            <div class="pkg-card" onclick="selectPackage(this, '1.060 Diamantes', 8500)">
-                <div class="pkg-title">💎 1.060</div>
-                <div class="pkg-price">8.500 FCFA</div>
+            <div class="pkg-card" onclick="selectPackage(this, '1.080 Diamantes', 6800)">
+                <div class="pkg-title">💎 1.080+</div>
+                <div class="pkg-price">6.800 FCFA</div>
             </div>
-            <div class="pkg-card" onclick="selectPackage(this, '2.180 Diamantes', 17500)">
-                <div class="pkg-title">💎 2.180</div>
-                <div class="pkg-price">17.500 FCFA</div>
+            <div class="pkg-card" onclick="selectPackage(this, '2.200 Diamantes', 13700)">
+                <div class="pkg-title">💎 2.200+</div>
+                <div class="pkg-price">13.700 FCFA</div>
             </div>
-            <div class="pkg-card" onclick="selectPackage(this, '5.600 Diamantes', 42000)">
-                <div class="pkg-title">💎 5.600</div>
-                <div class="pkg-price">42.000 FCFA</div>
-            </div>
+       
         </div>
 
         <!-- Botões de Ação -->

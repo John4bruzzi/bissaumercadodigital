@@ -108,10 +108,12 @@
         }
 
         .container {
-            padding: 1rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
+    padding: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+    animation: fadeIn 0.25s ease-out;
+}
+
 
         /* Hero Product Card */
         .product-hero {
@@ -320,18 +322,22 @@
 
         /* Navigation Inferior */
         .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(18, 25, 38, 0.95);
-            backdrop-filter: blur(12px);
-            display: flex;
-            justify-content: space-around;
-            padding: 0.65rem 0;
-            border-top: 1px solid var(--border);
-            z-index: 100;
-        }
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(18, 25, 38, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    justify-content: space-around;
+    padding: 0.65rem 0;
+    border-top: 1px solid var(--border);
+    z-index: 1000;
+    transform: translateZ(0);
+    will-change: transform;
+}
+
 
         .nav-item {
             display: flex;
@@ -419,10 +425,7 @@
                 <div class="pkg-title">🪙 3.250</div>
                 <div class="pkg-price">26.000 FCFA</div>
             </div>
-            <div class="pkg-card" onclick="selectPackage(this, '5.700 Moedas', 44000)">
-                <div class="pkg-title">🪙 5.700</div>
-                <div class="pkg-price">44.000 FCFA</div>
-            </div>
+
         </div>
 
         <!-- Botões de Ação -->

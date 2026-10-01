@@ -108,10 +108,12 @@
         }
 
         .container {
-            padding: 1rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
+    padding: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+    animation: fadeIn 0.25s ease-out;
+}
+
 
         /* Hero Product Card */
         .product-hero {
@@ -327,18 +329,22 @@
 
         /* Navigation Inferior */
         .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(18, 25, 38, 0.95);
-            backdrop-filter: blur(12px);
-            display: flex;
-            justify-content: space-around;
-            padding: 0.65rem 0;
-            border-top: 1px solid var(--border);
-            z-index: 100;
-        }
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(18, 25, 38, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    justify-content: space-around;
+    padding: 0.65rem 0;
+    border-top: 1px solid var(--border);
+    z-index: 1000;
+    transform: translateZ(0);
+    will-change: transform;
+}
+
 
         .nav-item {
             display: flex;
@@ -388,36 +394,38 @@
             <h3 class="input-card-title">1. Dados para Entrega</h3>
             <div class="form-group">
                 <label for="clientName">Seu Nome / Nome para o Perfil *</label>
-                <input type="text" id="clientName" class="form-input" placeholder="Ex: Mamadu Jalo" required>
+                <input type="text" id="clientName" class="form-input" placeholder="Ex: Du Black" required>
             </div>
             <div class="form-group">
                 <label for="clientWhatsApp">Nº de WhatsApp para Envio do Acesso *</label>
-                <input type="tel" id="clientWhatsApp" class="form-input" placeholder="Ex: 955288370" required>
+                <input type="tel" id="clientWhatsApp" class="form-input" placeholder="Ex: 95/96-5555555" required>
             </div>
         </div>
 
         <!-- Seleção do Plano -->
         <div class="packages-title">2. Escolha o Plano Desejado</div>
         <div class="package-grid">
-            <div class="pkg-card selected" onclick="selectPackage(this, '1 Tela / Ecrã Ultra HD (1 Mês)', 3000)">
+            <div class="pkg-card selected" onclick="selectPackage(this, '1 tela / Ecrã Ultra HD (1 Mês)', 2000)">
                 <div class="pkg-info">
-                    <div class="pkg-title">📺 1 Ecrã / Tela 4K Ultra HD</div>
-                    <div class="pkg-sub">Acesso individual com PIN privativo | 30 Dias</div>
+                    <div class="pkg-title">📺 1 Mês / 1 tela 4K Ultra HD</div>
+                    <div class="pkg-sub">Conta Compartilhada sem PIN | 30 Dias</div>
+<div class="pkg-sub">Garantia de 25 Dias | ✅</div>
                 </div>
-                <div class="pkg-price">3.000 FCFA</div>
+                <div class="pkg-price">2.000 FCFA</div>
             </div>
 
-            <div class="pkg-card" onclick="selectPackage(this, '2 Telas / Ecrãs Ultra HD (1 Mês)', 5500)">
+            <div class="pkg-card" onclick="selectPackage(this, '1 tela / Ecrã Ultra HD (3 Meses)', 7500)">
                 <div class="pkg-info">
-                    <div class="pkg-title">📺 2 Ecrãs / Telas 4K Ultra HD</div>
-                    <div class="pkg-sub">Dois perfis individuais com PIN | 30 Dias</div>
+                    <div class="pkg-title">📺 3 Meses / 1 tela 4K Ultra HD</div>
+                    <div class="pkg-sub">Perfil Privado com PIN | 90 Dias</div>
+<div class="pkg-sub">Garantia de 90 Dias | ✅</div>
                 </div>
-                <div class="pkg-price">5.500 FCFA</div>
+                <div class="pkg-price">7.500 FCFA</div>
             </div>
 
             <div class="pkg-card" onclick="selectPackage(this, 'Conta Completa Privada (1 Mês)', 10000)">
                 <div class="pkg-info">
-                    <div class="pkg-title">👑 Conta Completa Privada (5 Perfis)</div>
+                    <div class="pkg-title">1 Mês 👑 Conta Completa Privada (5 Perfis)</div>
                     <div class="pkg-sub">Controlo total da conta no seu e-mail | 30 Dias</div>
                 </div>
                 <div class="pkg-price">10.000 FCFA</div>

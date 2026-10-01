@@ -110,10 +110,12 @@
         }
 
         .container {
-            padding: 1rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
+    padding: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+    animation: fadeIn 0.25s ease-out;
+}
+
 
         /* Hero Product Card */
         .product-hero {
@@ -329,18 +331,22 @@
 
         /* Navigation Inferior */
         .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(18, 25, 38, 0.95);
-            backdrop-filter: blur(12px);
-            display: flex;
-            justify-content: space-around;
-            padding: 0.65rem 0;
-            border-top: 1px solid var(--border);
-            z-index: 100;
-        }
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(18, 25, 38, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    justify-content: space-around;
+    padding: 0.65rem 0;
+    border-top: 1px solid var(--border);
+    z-index: 1000;
+    transform: translateZ(0);
+    will-change: transform;
+}
+
 
         .nav-item {
             display: flex;
@@ -393,16 +399,16 @@
                 <select id="regionSelect" class="form-select">
                     <option value="Estados Unidos (EUA / USD)">🇺🇸 Estados Unidos (EUA / $)</option>
                     <option value="Portugal / Europa (EUR)">🇵🇹 Portugal / Europa (EUR / €)</option>
-                    <option value="Brasil (BRL)">🇧🇷 Brasil (BRL / R$)</option>
+                    <option value="França (EUR)">🇫🇷 França / Europa (EUR / €)</option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="clientName">Seu Nome Completo *</label>
-                <input type="text" id="clientName" class="form-input" placeholder="Ex: Mamadu Jalo" required>
+                <input type="text" id="clientName" class="form-input" placeholder="Ex: Du Black" required>
             </div>
             <div class="form-group">
                 <label for="clientWhatsApp">Nº de WhatsApp para Receber o Código *</label>
-                <input type="tel" id="clientWhatsApp" class="form-input" placeholder="Ex: 955288370" required>
+                <input type="tel" id="clientWhatsApp" class="form-input" placeholder="Ex: 95/96-5555555" required>
             </div>
         </div>
 
@@ -433,25 +439,25 @@
                 <div class="pkg-price">11.000 FCFA</div>
             </div>
 
-            <div class="pkg-card" onclick="selectPackage(this, 'Gift Card Saldo $10 / €10 / R$50', 7000)">
+            <div class="pkg-card" onclick="selectPackage(this, 'Gift Card Saldo $10 / €10', 7000)">
                 <div class="pkg-info">
-                    <div class="pkg-title">💳 Recarga Saldo $10 / €10 / R$50</div>
+                    <div class="pkg-title">💳 Recarga Saldo $10 / €10 </div>
                     <div class="pkg-sub">Adiciona dinheiro à sua Carteira PSN</div>
                 </div>
                 <div class="pkg-price">7.000 FCFA</div>
             </div>
 
-            <div class="pkg-card" onclick="selectPackage(this, 'Gift Card Saldo $25 / €25 / R$100', 16500)">
+            <div class="pkg-card" onclick="selectPackage(this, 'Gift Card Saldo $25 / €25', 16500)">
                 <div class="pkg-info">
-                    <div class="pkg-title">💳 Recarga Saldo $25 / €25 / R$100</div>
+                    <div class="pkg-title">💳 Recarga Saldo $25 / €25 </div>
                     <div class="pkg-sub">Adiciona dinheiro à sua Carteira PSN</div>
                 </div>
                 <div class="pkg-price">16.500 FCFA</div>
             </div>
 
-            <div class="pkg-card" onclick="selectPackage(this, 'Gift Card Saldo $50 / €50 / R$250', 32000)">
+            <div class="pkg-card" onclick="selectPackage(this, 'Gift Card Saldo $50 / €50', 32000)">
                 <div class="pkg-info">
-                    <div class="pkg-title">💳 Recarga Saldo $50 / €50 / R$250</div>
+                    <div class="pkg-title">💳 Recarga Saldo $50 / €50 </div>
                     <div class="pkg-sub">Adiciona dinheiro à sua Carteira PSN</div>
                 </div>
                 <div class="pkg-price">32.000 FCFA</div>

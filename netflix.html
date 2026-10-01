@@ -2,7 +2,7 @@
 <html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Netflix 4K Ultra HD - Mercado Digital Bissau</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -182,22 +182,18 @@
             margin-bottom: 0.35rem;
         }
 
-        .form-input {
-            width: 100%;
-            padding: 11px 13px;
-            background-color: var(--bg-dark);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            color: #ffffff;
-            font-size: 0.88rem;
-            font-weight: 600;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-
-        .form-input:focus {
-            border-color: var(--orange);
-        }
+        .form-input, .form-select, .form-textarea {
+    width: 100%;
+    padding: 11px 13px;
+    background-color: var(--bg-dark);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 16px; /* Alterado para 16px para evitar zoom em telemóveis */
+    font-weight: 600;
+    outline: none;
+    transition: border-color 0.2s;
+}
 
         /* Package Grid Selection */
         .packages-title {

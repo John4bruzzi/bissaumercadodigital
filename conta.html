@@ -629,7 +629,9 @@
                 }
 
                 // Gerar Link de Convite Pessoal
-                const referralLink = `https://bissaumercadodigital.github.io/index.html?ref=${user.uid}`;
+                const dominioAtual = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+const referralLink = `${dominioAtual}index.html?ref=${user.uid}`;
+
                 document.getElementById('myReferralLink').value = referralLink;
 
                 // Carregar Saldo de Pontos e Registar Afiliado

@@ -2,7 +2,7 @@
 <html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Meus Pedidos - Mercado Digital Bissau</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,7 +43,6 @@
             color: var(--text-main);
             line-height: 1.5;
             padding-bottom: 100px;
-            
         }
 
         @keyframes fadeIn {
@@ -110,12 +109,11 @@
         }
 
         .container {
-    padding: 1rem;
-    max-width: 600px;
-    margin: 0 auto;
-    animation: fadeIn 0.25s ease-out;
-}
-
+            padding: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            animation: fadeIn 0.25s ease-out;
+        }
 
         /* State Empty Orders */
         .empty-orders {
@@ -201,7 +199,7 @@
             letter-spacing: 0.5px;
         }
 
-        .status-badge.pendente {
+        .status-badge.pendente, .status-badge.processando {
             background-color: rgba(245, 158, 11, 0.15);
             color: var(--warning);
             border: 1px solid rgba(245, 158, 11, 0.3);
@@ -223,7 +221,7 @@
         .order-item-row {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
             font-size: 0.82rem;
         }
 
@@ -241,6 +239,38 @@
             color: var(--orange);
             font-weight: 800;
             white-space: nowrap;
+        }
+
+        /* Caixa do Produto Entregue */
+        .delivery-box {
+            background: rgba(16, 185, 129, 0.08);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 10px;
+            padding: 12px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .delivery-title {
+            color: var(--success);
+            font-size: 0.8rem;
+            font-weight: 800;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .delivery-content {
+            background: var(--bg-dark);
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            white-space: pre-wrap;
+            word-break: break-all;
+            border: 1px solid var(--border);
         }
 
         .order-footer {
@@ -300,22 +330,21 @@
 
         /* Navigation Inferior */
         .bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: rgba(18, 25, 38, 0.95);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    display: flex;
-    justify-content: space-around;
-    padding: 0.65rem 0;
-    border-top: 1px solid var(--border);
-    z-index: 1000;
-    transform: translateZ(0);
-    will-change: transform;
-}
-
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(18, 25, 38, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            display: flex;
+            justify-content: space-around;
+            padding: 0.65rem 0;
+            border-top: 1px solid var(--border);
+            z-index: 1000;
+            transform: translateZ(0);
+            will-change: transform;
+        }
 
         .nav-item {
             display: flex;
@@ -377,7 +406,22 @@
         <a href="https://wa.me/245955288370?text=Ol%C3%A1!%20Preciso%20de%20ajuda." target="_blank" class="nav-item"><span class="nav-icon">💬</span><span>Ajuda</span></a>
     </div>
 
-    <script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAk18pVSpBKX2kH6GtsNUXlIbfGPTLxKpo",
+            authDomain: "mercado-digital-bissau.firebaseapp.com",
+            projectId: "mercado-digital-bissau",
+            storageBucket: "mercado-digital-bissau.firebasestorage.app",
+            messagingSenderId: "171260734990",
+            appId: "1:171260734990:web:130c33169923af3437165f"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
         function updateCartBadge() {
             try {
                 const cart = JSON.parse(localStorage.getItem('bissau_cart')) || [];
@@ -388,17 +432,13 @@
             }
         }
 
-        function getOrders() {
-            return JSON.parse(localStorage.getItem('bissau_orders')) || [];
-        }
-
-        function renderOrders() {
-            const orders = getOrders();
+        async function renderOrders() {
+            const localOrders = JSON.parse(localStorage.getItem('bissau_orders')) || [];
             const emptyOrders = document.getElementById('emptyOrders');
             const ordersList = document.getElementById('ordersList');
             const btnClear = document.getElementById('btnClearHistory');
 
-            if (orders.length === 0) {
+            if (localOrders.length === 0) {
                 emptyOrders.style.display = 'block';
                 ordersList.innerHTML = '';
                 btnClear.style.display = 'none';
@@ -409,12 +449,40 @@
             btnClear.style.display = 'block';
             ordersList.innerHTML = '';
 
-            // Mostrar os mais recentes primeiro
-            const reversedOrders = [...orders].reverse();
+            // 1. Extrair lista de IDs dos pedidos locais
+            const orderIds = localOrders.map(o => o.orderId || o.id).filter(Boolean);
+
+            // 2. Procurar status atualizado no Firebase Firestore
+            let firestoreMap = {};
+            if (orderIds.length > 0) {
+                try {
+                    const q = query(collection(db, "pedidos"), where("orderId", "in", orderIds));
+                    const querySnapshot = await getDocs(q);
+                    querySnapshot.forEach(docSnap => {
+                        const data = docSnap.data();
+                        firestoreMap[data.orderId] = data;
+                    });
+                } catch (e) {
+                    console.warn("Não foi possível sincronizar em tempo real com o Firestore:", e);
+                }
+            }
+
+            // 3. Renderizar pedidos combinando dados locais com dados da Nuvem
+            const reversedOrders = [...localOrders].reverse();
 
             reversedOrders.forEach((order) => {
+                const displayOrderId = order.orderId || order.id || 'ORD-000000';
+                
+                // Se o pedido existir na nuvem, usa o status e os dados entregues atualizados
+                const firestoreData = firestoreMap[displayOrderId] || {};
+                const currentStatus = firestoreData.status || order.status || 'Pendente';
+                const dadosEntregues = firestoreData.dadosEntregues || order.dadosEntregues || '';
+
                 const orderCard = document.createElement('div');
                 orderCard.className = 'order-card';
+
+                const clienteNome = order.clienteNome || order.cliente || '';
+                const clienteTelefone = order.clienteTelefone || order.telefone_cliente || '';
 
                 let itemsHtml = '';
                 if (order.itens && Array.isArray(order.itens)) {
@@ -425,6 +493,7 @@
                                 <div>
                                     <div class="item-name">${item.nome}</div>
                                     <div class="item-sub">${item.opcao || ''}</div>
+                                    ${clienteNome ? `<div class="item-sub">Cliente: ${clienteNome}${clienteTelefone ? '| WA: ' + clienteTelefone : ''}</div>` : ''}
                                 </div>
                                 <div class="item-price-qty">${item.quantidade || 1}x | ${itemTotal.toLocaleString()} FCFA</div>
                             </div>
@@ -432,27 +501,40 @@
                     });
                 }
 
-                const statusClass = (order.status || 'Pendente').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                const statusClass = currentStatus.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+                // Se o pedido foi concluído, gera o bloco com as credenciais/códigos
+                let deliveryHtml = '';
+                if (currentStatus === 'Concluído' && dadosEntregues) {
+                    deliveryHtml = `
+                        <div class="delivery-box">
+                            <div class="delivery-title">🎁 Seu Produto / Acesso Liberado:</div>
+                            <div class="delivery-content">${dadosEntregues}</div>
+                        </div>
+                    `;
+                }
 
                 orderCard.innerHTML = `
                     <div class="order-header">
                         <div>
-                            <div class="order-id">${order.id || 'ORD-000000'}</div>
-                            <div class="order-date">${order.data || 'Data não disponível'}</div>
+                            <div class="order-id">${displayOrderId}</div>
+                            <div class="order-date">${order.data || 'Data recente'}</div>
                         </div>
-                        <span class="status-badge ${statusClass}">${order.status || 'Pendente'}</span>
+                        <span class="status-badge ${statusClass}">${currentStatus}</span>
                     </div>
 
                     <div class="order-items">
                         ${itemsHtml}
                     </div>
 
+                    ${deliveryHtml}
+
                     <div class="order-footer">
                         <div>
                             <div class="order-total-label">Total</div>
                             <div class="order-total-val">${(order.total || 0).toLocaleString()} FCFA</div>
                         </div>
-                        <button class="btn-wa-support" onclick="contactSupportOrder('${order.id}')">
+                        <button class="btn-wa-support" onclick="contactSupportOrder('${displayOrderId}')">
                             💬 Suporte
                         </button>
                     </div>

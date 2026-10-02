@@ -2,7 +2,7 @@
 <html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Meu Carrinho - Mercado Digital Bissau</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,7 +43,6 @@
             color: var(--text-main);
             line-height: 1.5;
             padding-bottom: 100px;
-            
         }
 
         @keyframes fadeIn {
@@ -86,12 +85,11 @@
         }
 
         .container {
-    padding: 1rem;
-    max-width: 600px;
-    margin: 0 auto;
-    animation: fadeIn 0.25s ease-out;
-}
-
+            padding: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            animation: fadeIn 0.25s ease-out;
+        }
 
         /* Cart State */
         .empty-cart {
@@ -299,8 +297,8 @@
             color: #ffffff;
             font-size: 16px;
             font-weight: 600;
-				outline: none;
-				transition: border-color 0.2s;
+            outline: none;
+            transition: border-color 0.2s;
         }
 
         .form-input:focus {
@@ -324,7 +322,33 @@
             font-size: 16px;
         }
 
-        .btn-checkout {
+        /* Botões de Ação Atualizados */
+        .action-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .btn-site {
+            width: 100%;
+            background: linear-gradient(135deg, var(--orange), #d95300);
+            color: #ffffff;
+            border: none;
+            padding: 13px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px var(--orange-glow);
+            text-transform: uppercase;
+        }
+
+        .btn-whatsapp {
             width: 100%;
             background: linear-gradient(135deg, #25d366, #128c7e);
             color: #ffffff;
@@ -342,7 +366,7 @@
             text-transform: uppercase;
         }
 
-        .btn-checkout:active {
+        .btn-site:active, .btn-whatsapp:active {
             transform: scale(0.98);
         }
 
@@ -356,27 +380,26 @@
             font-size: 0.75rem;
             font-weight: 700;
             cursor: pointer;
-            margin-top: 0.5rem;
+            margin-top: 0.8rem;
         }
 
         /* Navigation Inferior */
         .bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: rgba(18, 25, 38, 0.95);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    display: flex;
-    justify-content: space-around;
-    padding: 0.65rem 0;
-    border-top: 1px solid var(--border);
-    z-index: 1000;
-    transform: translateZ(0);
-    will-change: transform;
-}
-
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(18, 25, 38, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            display: flex;
+            justify-content: space-around;
+            padding: 0.65rem 0;
+            border-top: 1px solid var(--border);
+            z-index: 1000;
+            transform: translateZ(0);
+            will-change: transform;
+        }
 
         .nav-item {
             display: flex;
@@ -455,12 +478,19 @@
 
                 <div class="payment-info-box">
                     <strong>💳 Pagamento por Orange Money 🇬🇼</strong>
-                    O pagamento é feito enviando o valor total para o número <strong>955288370</strong>. O comprovativo será enviado no WhatsApp.
+                    O pagamento é feito enviando o valor total para o número <strong>955288370</strong>.
                 </div>
 
-                <button class="btn-checkout" onclick="checkoutWhatsApp()">
-                    💬 Finalizar Pedido no WhatsApp
-                </button>
+                <!-- Novos Botões de Ação -->
+                <div class="action-container">
+                    <button class="btn-site" onclick="checkoutSite()">
+                        💳 Pagar pelo Site (Automático)
+                    </button>
+                    
+                    <button class="btn-whatsapp" onclick="checkoutWhatsApp()">
+                        💬 Finalizar no WhatsApp
+                    </button>
+                </div>
 
                 <button class="btn-clear-cart" onclick="clearCart()">Esvaziar Carrinho</button>
             </div>
@@ -561,7 +591,30 @@
             }
         };
 
-        // Finalizar no WhatsApp
+        // NOVO: Função para avançar para a página de Checkout pelo Site
+        window.checkoutSite = function() {
+            const cart = getCart();
+            const name = document.getElementById('clientName').value.trim();
+            const phone = document.getElementById('clientPhone').value.trim();
+
+            if (cart.length === 0) {
+                alert("O seu carrinho está vazio!");
+                return;
+            }
+
+            if (!name || !phone) {
+                alert("Por favor, preencha o seu Nome e Número de WhatsApp para continuar para o pagamento.");
+                return;
+            }
+
+            // Guardar os dados do cliente para preencher automaticamente na página de checkout
+            localStorage.setItem('bissau_client_info', JSON.stringify({ name: name, phone: phone }));
+            
+            // Redirecionar para a página de checkout
+            window.location.href = 'checkout.html';
+        };
+
+        // Função Original: Finalizar no WhatsApp
         window.checkoutWhatsApp = function() {
             const cart = getCart();
             const name = document.getElementById('clientName').value.trim();

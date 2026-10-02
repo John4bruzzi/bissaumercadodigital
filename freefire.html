@@ -2,7 +2,7 @@
 <html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Recarga Free Fire Diamantes - Mercado Digital Bissau</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,7 +41,6 @@
             color: var(--text-main);
             line-height: 1.5;
             padding-bottom: 100px;
-            
         }
 
         @keyframes fadeIn {
@@ -108,12 +107,11 @@
         }
 
         .container {
-    padding: 1rem;
-    max-width: 600px;
-    margin: 0 auto;
-    animation: fadeIn 0.25s ease-out;
-}
-
+            padding: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            animation: fadeIn 0.25s ease-out;
+        }
 
         /* Hero Product Card */
         .product-hero {
@@ -182,18 +180,18 @@
             margin-bottom: 0.35rem;
         }
 
-        .form-input, .form-select, .form-textarea {
-    width: 100%;
-    padding: 11px 13px;
-    background-color: var(--bg-dark);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    color: #ffffff;
-    font-size: 16px; /* Alterado para 16px para evitar zoom em telemóveis */
-    font-weight: 600;
-    outline: none;
-    transition: border-color 0.2s;
-}
+        .form-input {
+            width: 100%;
+            padding: 11px 13px;
+            background-color: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 600;
+            outline: none;
+            transition: border-color 0.2s;
+        }
 
         /* Package Grid Selection */
         .packages-title {
@@ -318,22 +316,21 @@
 
         /* Navigation Inferior */
         .bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: rgba(18, 25, 38, 0.95);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    display: flex;
-    justify-content: space-around;
-    padding: 0.65rem 0;
-    border-top: 1px solid var(--border);
-    z-index: 1000;
-    transform: translateZ(0);
-    will-change: transform;
-}
-
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(18, 25, 38, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            display: flex;
+            justify-content: space-around;
+            padding: 0.65rem 0;
+            border-top: 1px solid var(--border);
+            z-index: 1000;
+            transform: translateZ(0);
+            will-change: transform;
+        }
 
         .nav-item {
             display: flex;
@@ -414,7 +411,6 @@
                 <div class="pkg-title">💎 2.200+</div>
                 <div class="pkg-price">13.700 FCFA</div>
             </div>
-       
         </div>
 
         <!-- Botões de Ação -->
@@ -442,7 +438,7 @@
 
     <script>
         let selectedLabel = '100 Diamantes';
-        let selectedPrice = 1000;
+        let selectedPrice = 750; // Corrigido para 750 FCFA
 
         function selectPackage(element, label, price) {
             document.querySelectorAll('.pkg-card').forEach(card => card.classList.remove('selected'));

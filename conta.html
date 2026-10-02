@@ -532,6 +532,13 @@
     </div>
 
     <script>
+        // Guardar parâmetro de convite (?ref=UID) se vier no URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const refParam = urlParams.get('ref');
+        if (refParam) {
+            localStorage.setItem('bissau_ref', refParam);
+        }
+
         function updateCartBadge() {
             try {
                 const cart = JSON.parse(localStorage.getItem('bissau_cart')) || [];
@@ -625,8 +632,9 @@
                 const referralLink = `https://bissaumercadodigital.github.io/index.html?ref=${user.uid}`;
                 document.getElementById('myReferralLink').value = referralLink;
 
-                // Carregar Saldo de Pontos do Firestore
+                // Carregar Saldo de Pontos e Registar Afiliado
                 try {
+                    const savedRef = localStorage.getItem('bissau_ref');
                     const userRef = doc(db, "usuarios", user.uid);
                     const docSnap = await getDoc(userRef);
 
@@ -634,14 +642,27 @@
                         const data = docSnap.data();
                         const pontos = data.pontos || 0;
                         document.getElementById('userPoints').innerText = pontos.toLocaleString() + ' FCFA';
+
+                        // Se o perfil existe mas ainda não tinha 'convidadoPor', regista agora
+                        if (!data.convidadoPor && savedRef && savedRef !== user.uid) {
+                            await setDoc(userRef, { convidadoPor: savedRef }, { merge: true });
+                            localStorage.removeItem('bissau_ref');
+                        }
                     } else {
-                        // Garantir criação inicial do perfil no Firestore
-                        await setDoc(userRef, {
+                        // Criação inicial do perfil no Firestore guardando quem convidou
+                        const userData = {
                             nome: user.displayName || 'Cliente',
                             email: user.email,
                             pontos: 0,
                             criadoEm: new Date().toISOString()
-                        }, { merge: true });
+                        };
+
+                        if (savedRef && savedRef !== user.uid) {
+                            userData.convidadoPor = savedRef;
+                            localStorage.removeItem('bissau_ref');
+                        }
+
+                        await setDoc(userRef, userData, { merge: true });
                         document.getElementById('userPoints').innerText = '0 FCFA';
                     }
                 } catch (err) {

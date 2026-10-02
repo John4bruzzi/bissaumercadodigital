@@ -511,14 +511,14 @@
             <div id="pointsBox" class="points-box" style="display: none;">
                 <div class="points-header">
                     <span class="points-title">🎁 Usar Saldo de Pontos</span>
-                    <span class="points-badge" id="cartPointsBalance">0 FCFA</span>
+                    <span class="points-badge" id="cartPointsBalance">0 Pts</span>
                 </div>
                 <div class="points-msg" id="pointsMsgText">
-                    Compra mínima de 5.000 FCFA para utilizar os seus pontos de desconto.
+                    Pode utilizar os seus pontos (1 Ponto = 1 FCFA, máximo de 5.000 pontos por compra).
                 </div>
                 <label class="points-checkbox-label" id="pointsCheckboxContainer" style="display: none;">
                     <input type="checkbox" id="usePointsCheckbox" onchange="renderCart()">
-                    <span>Abater saldo de pontos no total</span>
+                    <span id="pointsLabelText">Abater pontos no total</span>
                 </label>
             </div>
 
@@ -554,7 +554,7 @@
 
                 <div class="form-group">
                     <label for="clientPhone">Seu Nº de WhatsApp / Contacto *</label>
-                    <input type="tel" id="clientPhone" class="form-input" placeholder="Ex: 95/96-5555555" required>
+                    <input type="tel" id="clientPhone" class="form-input" placeholder="Ex: 955288370" required>
                 </div>
 
                 <div class="payment-info-box">
@@ -589,7 +589,7 @@
 
     <script>
         let userPointsAvailable = 0;
-        const VALOR_MINIMO_PONTOS = 5000; // Limite estilo AliExpress
+        const MAX_PONTOS_POR_COMPRA = 5000; // Máximo de 5000 pontos aplicáveis por compra
 
         function getCart() {
             return JSON.parse(localStorage.getItem('bissau_cart')) || [];
@@ -641,30 +641,40 @@
                 cartList.appendChild(itemElement);
             });
 
-            // Gestão do Desconto por Pontos
+            // Gestão do Desconto por Pontos (1 Ponto = 1 FCFA, Max 5000)
             const usePointsCheckbox = document.getElementById('usePointsCheckbox');
             const pointsCheckboxContainer = document.getElementById('pointsCheckboxContainer');
             const pointsMsgText = document.getElementById('pointsMsgText');
             let desconto = 0;
 
             if (userPointsAvailable > 0) {
-                if (subtotal >= VALOR_MINIMO_PONTOS) {
-                    pointsCheckboxContainer.style.display = 'flex';
-                    pointsMsgText.innerText = "Tem saldo disponível e a sua compra cumpre o valor mínimo de 5.000 FCFA!";
-                    pointsMsgText.style.color = "var(--success)";
+                pointsCheckboxContainer.style.display = 'flex';
+                
+                // Limitar o desconto aos pontos disponíveis, ao teto de 5000 e ao subtotal da compra
+                const pontosPermitidos = Math.min(userPointsAvailable, MAX_PONTOS_POR_COMPRA, subtotal);
+                
+                document.getElementById('pointsLabelText').innerText = `Abater até ${pontosPermitidos.toLocaleString()} pontos (${pontosPermitidos.toLocaleString()} FCFA)`;
+                pointsMsgText.innerText = `Tem ${userPointsAvailable.toLocaleString()} pontos disponíveis. (Máximo de 5.000 pontos por compra).`;
+                pointsMsgText.style.color = "var(--success)";
 
-                    if (usePointsCheckbox && usePointsCheckbox.checked) {
-                        desconto = Math.min(subtotal, userPointsAvailable);
-                    }
-                } else {
-                    pointsCheckboxContainer.style.display = 'none';
-                    if (usePointsCheckbox) usePointsCheckbox.checked = false;
-                    pointsMsgText.innerText = `Aumente o carrinho para pelo menos ${VALOR_MINIMO_PONTOS.toLocaleString()} FCFA para utilizar os seus pontos.`;
-                    pointsMsgText.style.color = "var(--text-muted)";
+                if (usePointsCheckbox && usePointsCheckbox.checked) {
+                    desconto = pontosPermitidos;
                 }
+            } else {
+                pointsCheckboxContainer.style.display = 'none';
+                if (usePointsCheckbox) usePointsCheckbox.checked = false;
+                pointsMsgText.innerText = "Não tem pontos disponíveis de momento.";
+                pointsMsgText.style.color = "var(--text-muted)";
             }
 
             const total = Math.max(0, subtotal - desconto);
+
+            // Guardar dados estruturados para usar no checkout
+            localStorage.setItem('bissau_checkout_totals', JSON.stringify({
+                subtotal: subtotal,
+                desconto: desconto,
+                total: total
+            }));
 
             document.getElementById('subtotalVal').innerText = subtotal.toLocaleString() + ' FCFA';
             
@@ -699,6 +709,7 @@
         window.clearCart = function() {
             if (confirm("Tem certeza que deseja esvaziar o seu carrinho?")) {
                 localStorage.removeItem('bissau_cart');
+                localStorage.removeItem('bissau_checkout_totals');
                 renderCart();
             }
         };
@@ -726,7 +737,8 @@
             const cart = getCart();
             const name = document.getElementById('clientName').value.trim();
             const phone = document.getElementById('clientPhone').value.trim();
-            const usePointsCheckbox = document.getElementById('usePointsCheckbox');
+            
+            const totals = JSON.parse(localStorage.getItem('bissau_checkout_totals')) || { subtotal: 0, desconto: 0, total: 0 };
 
             if (cart.length === 0) {
                 alert("O seu carrinho está vazio!");
@@ -737,15 +749,6 @@
                 alert("Por favor, preencha o seu Nome e Número de WhatsApp para entrega.");
                 return;
             }
-
-            let subtotal = 0;
-            cart.forEach(item => subtotal += (item.price || 0) * (item.quantidade || 1));
-
-            let desconto = 0;
-            if (usePointsCheckbox && usePointsCheckbox.checked && subtotal >= VALOR_MINIMO_PONTOS) {
-                desconto = Math.min(subtotal, userPointsAvailable);
-            }
-            let total = Math.max(0, subtotal - desconto);
 
             let text = `🛒 *NOVO PEDIDO - MERCADO DIGITAL BISSAU*\n`;
             text += `--------------------------------\n`;
@@ -761,11 +764,11 @@
             });
 
             text += `--------------------------------\n`;
-            text += `💰 *Subtotal:* ${subtotal.toLocaleString()} FCFA\n`;
-            if (desconto > 0) {
-                text += `🎁 *Desconto (Pontos Usados):* -${desconto.toLocaleString()} FCFA\n`;
+            text += `💰 *Subtotal:* ${totals.subtotal.toLocaleString()} FCFA\n`;
+            if (totals.desconto > 0) {
+                text += `🎁 *Desconto (Pontos Utilizados):* -${totals.desconto.toLocaleString()} FCFA\n`;
             }
-            text += `🔥 *TOTAL A PAGAR:* ${total.toLocaleString()} FCFA\n`;
+            text += `🔥 *TOTAL A PAGAR:* ${totals.total.toLocaleString()} FCFA\n`;
             text += `💳 *Método de Pagamento:* Orange Money (955288370)\n\n`;
             text += `Aguardando confirmação para realizar a transferência/envio do comprovativo.`;
 
@@ -777,14 +780,15 @@
                 id: 'ORD-' + Math.floor(100000 + Math.random() * 900000),
                 data: new Date().toLocaleDateString('pt-PT'),
                 itens: cart,
-                subtotal: subtotal,
-                desconto: desconto,
-                total: total,
+                subtotal: totals.subtotal,
+                desconto: totals.desconto,
+                total: totals.total,
                 status: 'Pendente'
             });
             localStorage.setItem('bissau_orders', JSON.stringify(pedidos));
 
             localStorage.removeItem('bissau_cart');
+            localStorage.removeItem('bissau_checkout_totals');
             window.open(waUrl, '_blank');
         };
 
@@ -824,7 +828,7 @@
 
                 if (userPointsAvailable > 0) {
                     pointsBox.style.display = 'block';
-                    document.getElementById('cartPointsBalance').innerText = userPointsAvailable.toLocaleString() + ' FCFA';
+                    document.getElementById('cartPointsBalance').innerText = userPointsAvailable.toLocaleString() + ' Pts';
                     renderCart();
                 } else {
                     pointsBox.style.display = 'none';

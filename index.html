@@ -121,6 +121,21 @@
             flex-shrink: 0;
         }
 
+        /* Badge de Pontos em Tempo Real */
+        .points-badge-top {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: var(--success);
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.72rem;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
         .btn-auth-header {
             background: linear-gradient(135deg, var(--orange), #d95300);
             color: #ffffff;
@@ -777,6 +792,9 @@
 
                 <!-- Logado -->
                 <div id="userTopBar" class="user-logged-menu" style="display: none;">
+                    <a href="conta.html" class="points-badge-top" title="Seu Saldo de Pontos">
+                        🎁 <span id="topUserPoints">0</span> Pts
+                    </a>
                     <a href="carrinho.html" class="icon-cart-link" title="Meu Carrinho">
                         🛒
                         <span class="cart-badge-count" id="cartBadge">0</span>
@@ -1079,7 +1097,9 @@
         import { 
             getFirestore, 
             doc, 
-            setDoc 
+            getDoc,
+            setDoc,
+            onSnapshot
         } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
@@ -1096,6 +1116,8 @@
         const db = getFirestore(app);
         const googleProvider = new GoogleAuthProvider();
 
+        let unsubscribePoints = null;
+
         onAuthStateChanged(auth, (user) => {
             const guestTopBar = document.getElementById('guestTopBar');
             const userTopBar = document.getElementById('userTopBar');
@@ -1109,9 +1131,24 @@
                 } else if (user.displayName) {
                     document.getElementById('topAvatarImg').src = `https://ui-avatars.com/api/?name=${encodeURIComponent(user.displayName)}&background=ff6600&color=fff`;
                 }
+
+                // Escutar Saldo de Pontos em Tempo Real via Firestore
+                const userRef = doc(db, "usuarios", user.uid);
+                unsubscribePoints = onSnapshot(userRef, (docSnap) => {
+                    if (docSnap.exists()) {
+                        const pontos = docSnap.data().pontos || 0;
+                        document.getElementById('topUserPoints').innerText = pontos.toLocaleString();
+                    } else {
+                        document.getElementById('topUserPoints').innerText = "0";
+                    }
+                }, (err) => {
+                    console.error("Erro ao ouvir pontos:", err);
+                });
+
             } else {
                 guestTopBar.style.display = 'block';
                 userTopBar.style.display = 'none';
+                if (unsubscribePoints) unsubscribePoints();
             }
         });
 

@@ -788,7 +788,7 @@
                 <span class="location-badge">GW</span>
                 <!-- Pontos posicionados logo a seguir ao GW -->
                 <a href="conta.html" id="topPointsContainer" class="points-badge-top" title="Seu Saldo de Pontos" style="display: none;">
-                     <span id="topUserPoints">P:0</span>
+                     <span id="topUserPoints">0</span>
                 </a>
             </div>
 
@@ -1183,7 +1183,7 @@
                         const pontos = docSnap.data().pontos || 0;
                         document.getElementById('topUserPoints').innerText = pontos.toLocaleString();
                     } else {
-                        document.getElementById('topUserPoints').innerText = "0";
+                        document.getElementById('topUserPoints').innerText = "P:0";
                     }
                 }, (err) => {
                     console.error("Erro ao ouvir pontos:", err);
